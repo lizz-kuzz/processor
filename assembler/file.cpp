@@ -19,7 +19,7 @@ void read_file(const char *TEXT, prog *text) {
 
     fclose(file);
 
-    text_normalize(text);
+    program_text_normalize(text);
 }
 
 int num_of_rows(char *text)  {
@@ -46,13 +46,14 @@ long int count_symbols(FILE *file)  {
 
 
 
-void text_normalize(prog *text)  {
+void program_text_normalize(prog *text)  {
     assert(text != nullptr && "null pointer");
 
     text->NUMBER = num_of_rows(text->text_buf);
    
     char *point = text->text_buf;
-    text->text = (char **) calloc(text->NUMBER, sizeof(char *));
+    
+    text->text = (char **) calloc(text->NUMBER + 1, sizeof(char *));
 
     assert(text->text != nullptr && "null pointer");
 
@@ -63,6 +64,11 @@ void text_normalize(prog *text)  {
             *point = '\0';
             text->text[i] = point + 1;
             i++;
+        }
+        if (*point == ';') {
+            while (*point != '\n') {
+                point++;
+            }
         }
     }
 }

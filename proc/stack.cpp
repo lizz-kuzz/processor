@@ -2,7 +2,6 @@
 #include "stack.hpp"
 #include "debug.hpp"
 
-
 static int file_status = FILE_CLOSE;
 FILE *logs_;
 

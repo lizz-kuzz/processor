@@ -19,7 +19,7 @@ void read_file(const char *TEXT, prog *text) {
 
     fclose(file);
 
-    text_normalize(text);
+    program_text_normalize(text);
 }
 
 int num_of_rows(char *text)  {
@@ -44,7 +44,7 @@ long int count_symbols(FILE *file)  {
     return number;
 }
 
-void text_normalize(prog *text)  {
+void program_text_normalize(prog *text)  {
     assert(text != nullptr && "null pointer");
 
     text->NUMBER_OF_ROW = num_of_rows(text->text_buf);
