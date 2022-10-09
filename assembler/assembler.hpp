@@ -8,6 +8,6 @@ void assembler(const char *file, prog *text_program);
 
 char *check_cmd(char *cmd);
 
-void printf_listing(prog *text_program);
+void printf_listing(prog *text_program, int count_cmd);
 
 #endif

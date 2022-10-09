@@ -10,12 +10,15 @@ int main() {
 
     // const char *FILE_PROG = "C://Users//User//Desktop//programs//processor//res//ass_input.txt";
     // const char *FILE_ASS_OUTPUT = "C://Users//User//Desktop//programs//processor//res//ass.output";
-    // const char *FILE_DISASS_OUTPUT = "C://Users//User//Desktop//programs//processor//res//disass.output";
 
     read_file(FILE_PROG, &program);
-    for (int i = 0; i < 9; i++) {
-        printf("%s\n", program.text[i]);
-    }
+
+    // char cmd[20];
+    // int n = 0;
+    // int k = 0;
+    // sscanf("4:", "%d%n", &k, &n);
+    // printf("%d\n%d", k, n);
+ 
     assembler(FILE_ASS_OUTPUT, &program);
     
     free(program.code);
