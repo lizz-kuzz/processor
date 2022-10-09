@@ -2,6 +2,10 @@
 #include "file.hpp"
 
 #define LEN_ARR_LABLES 10
+#define BIT_CONST 4
+#define BIT_REG 5
+#define BIT_RAW 6
+
 
 void assembler(const char *file, prog *text_program) {
     FILE *fp = fopen(file, "w+b");
@@ -13,11 +17,13 @@ void assembler(const char *file, prog *text_program) {
 
     assert(text_program->code != nullptr && "null pointer");
 
-    int lables[LEN_ARR_LABLES] = {0};
+    int lables[LEN_ARR_LABLES] = {};
     char cmd[10]; 
     int ip = 0;
     int len = 0;
     int labl = 0;
+
+
     for (int i = 0; i < text_program->NUMBER; i++) {
         if (sscanf(text_program->text[i], "%d", &labl) != 0) {
             // printf("%d", ip);
@@ -27,19 +33,40 @@ void assembler(const char *file, prog *text_program) {
 
 
         if (strncmp(cmd, "push", 4) == 0) {
-            text_program->code[ip++] = PUSH;
+            text_program->code[ip] = PUSH;
             text_program->text[i] += len;
 
             int arg = 0;
-            // char mem_arg[10];
+            char arg_reg_raw[10];
             if (sscanf(text_program->text[i], "%d", &arg) != 0) {
+                text_program->code[ip] = text_program->code[ip] | (1 << BIT_CONST);
+                ip++;
                 text_program->code[ip++] = arg;
-            }
-            // } else if (sscanf(text_program->text[i], "%s", mem_arg) != 0) {
-            //     if (strncmp(mem_arg, "r", 1) == 0) {
-
-            //     }
-            // }
+            } else if (sscanf(text_program->text[i], "%s", arg_reg_raw) != 0) {
+                if (strncmp(arg_reg_raw, "rax", 3) == 0) {
+                    text_program->code[ip] = text_program->code[ip] | (1 << BIT_REG);
+                    ip++;
+                    text_program->code[ip++] = 1;
+                } else if (strncmp(arg_reg_raw, "rbx", 3) == 0) {
+                    text_program->code[ip] = text_program->code[ip] | (1 << BIT_REG);
+                    ip++;
+                    text_program->code[ip++] = 2;
+                } else if (strncmp(arg_reg_raw, "rcx", 3) == 0) {
+                    text_program->code[ip] = text_program->code[ip] | (1 << BIT_REG);
+                    ip++;
+                    text_program->code[ip++] = 3;
+                } else if (strncmp(arg_reg_raw, "rdx", 3) == 0) {
+                    text_program->code[ip] = text_program->code[ip] | (1 << BIT_REG);
+                    ip++;
+                    text_program->code[ip++] = 4;
+                } else if (strncmp(arg_reg_raw, "[", 1) == 0) {
+                    text_program->code[ip] = text_program->code[ip] | (1 << BIT_RAW);
+                    ip++;
+                    text_program->text[i] += 2;
+                    sscanf(text_program->text[i], "%d", &arg);
+                    text_program->code[ip++] = arg;
+                }
+            } 
 
         } else if (strncmp(cmd, "hlt", 3) == 0) {
             text_program->code[ip++] = HLT;
@@ -75,6 +102,7 @@ void assembler(const char *file, prog *text_program) {
             int arg = 0;
             if (sscanf(text_program->text[i], "%d", &arg) != 0) {
                 text_program->code[ip++] = arg;
+
             } else if (*text_program->text[i] == ':') {
                 text_program->text[i]++;
                 sscanf(text_program->text[i], "%d", &labl);
@@ -86,7 +114,6 @@ void assembler(const char *file, prog *text_program) {
         }
     }
 
-    printf("%d", ip);
     for (int i = 0; i < ip; i++) {
         fprintf(fp, "%d ", text_program->code[i]);
     }
@@ -114,6 +141,21 @@ void printf_listing(prog *text_program, int count_cmd) {
             fprintf(fp, "%02x           %s\n", text_program->code[ip], "HLT");
             break;
         case PUSH:
+            fprintf(fp, "%02x   ", text_program->code[ip]);
+            ip++;
+            fprintf(fp, "%02d      %s\n", text_program->code[ip], "PUSH");
+            break;
+        case (PUSH | (1 << BIT_CONST)):
+            fprintf(fp, "%02x   ", text_program->code[ip]);
+            ip++;
+            fprintf(fp, "%02d      %s\n", text_program->code[ip], "PUSH");
+            break;
+        case (PUSH | (1 << BIT_RAW)):
+            fprintf(fp, "%02x   ", text_program->code[ip]);
+            ip++;
+            fprintf(fp, "%02d      %s\n", text_program->code[ip], "PUSH");
+            break;
+        case (PUSH | (1 << BIT_REG)):
             fprintf(fp, "%02x   ", text_program->code[ip]);
             ip++;
             fprintf(fp, "%02d      %s\n", text_program->code[ip], "PUSH");

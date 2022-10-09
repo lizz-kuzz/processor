@@ -1,9 +1,8 @@
-push 49 ;oiuytredsw
-push 20
-4:
+push rax ;oiuytredsw
+push [10]
 add
 dump
-jmp :4
+jmp :2
 div
 out
 hlt
