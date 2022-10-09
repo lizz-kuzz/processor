@@ -52,6 +52,7 @@ void assembler(const char *file, prog *text_program) {
 
         } else if (strncmp(cmd, "jmp", 2) == 0) {
             text_program->code[ip++] = JMP;
+            text_program->text[i] += strlen(cmd);
 
             int arg = 0;
             sscanf(text_program->text[i], "%d", &arg);
@@ -65,7 +66,67 @@ void assembler(const char *file, prog *text_program) {
     for (int i = 0; i < ip; i++) {
         fprintf(fp, "%d ", text_program->code[i]);
     }
+    printf_listing(text_program);
+
     fprintf(fp, "\n");
     fclose(fp);
 }
 
+void printf_listing(prog *text_program) {
+
+    const char *FILE_LISTING = "/mnt/c/Users/User/Desktop/programs/processor/res/listing.txt"; 
+
+    FILE *fp = fopen(FILE_LISTING, "w");
+    assert(fp != nullptr && "coudn't open file");
+
+    for (int ip = 0; ip < text_program->NUMBER * 2; ip++) {
+        fprintf(fp, "%05d    ", ip);
+        switch (text_program->code[ip])
+        {
+        case HLT:
+            fprintf(fp, "%02x           %s\n", text_program->code[ip], "HLT");
+            break;
+        case PUSH:
+            fprintf(fp, "%02x   ", text_program->code[ip]);
+            ip++;
+            fprintf(fp, "%02d      %s\n", text_program->code[ip], "PUSH");
+            break;
+        case ADD:
+            fprintf(fp, "%02x           %s\n", text_program->code[ip], "ADD");
+            break;
+        case SUB:
+            fprintf(fp, "%02x           %s\n", text_program->code[ip], "SUB");
+            break;
+        case MUL:
+            fprintf(fp, "%02x           %s\n", text_program->code[ip], "MUL");
+            break;
+        case DIV:
+            fprintf(fp, "%02x           %s\n", text_program->code[ip], "DIV");
+            break;
+        case OUT:
+            fprintf(fp, "%02x           %s\n", text_program->code[ip], "OUT");
+            break;
+        case DUMP:
+            fprintf(fp, "%02x           %s\n", text_program->code[ip], "DUMP");
+            break;
+        case IN:
+            fprintf(fp, "%02x           %s\n", text_program->code[ip], "IN");
+            break;
+        case JMP:
+            fprintf(fp, "%02x   ", text_program->code[ip]);
+            ip++;
+            fprintf(fp, "%02d     %s\n", text_program->code[ip], "JMP");
+            break;
+        case DUP:
+            fprintf(fp, "%02x           %s\n", text_program->code[ip++], "DUP");
+            break;      
+        default:
+            fprintf(fp, "didn't found comand\n");
+            break;
+        }
+
+    }
+
+    fclose(fp);
+
+}

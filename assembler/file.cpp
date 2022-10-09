@@ -64,11 +64,11 @@ void program_text_normalize(prog *text)  {
             *point = '\0';
             text->text[i] = point + 1;
             i++;
-        }
-        if (*point == ';') {
-            while (*point != '\n') {
-                point++;
-            }
+        } else if (*point == ';') {
+            for (; *point != '\n'; point++) continue;
+            *point = '\0';
+            text->text[i] = point + 1;
+            i++;
         }
     }
 }
