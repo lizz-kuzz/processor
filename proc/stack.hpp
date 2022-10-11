@@ -22,17 +22,17 @@ void stack_ctor_  (stack *stk, size_t capacity,  const char *func,
                                                 int line, 
                                                 const char *name_file);
 #else
-void stack_ctor_  (stack *stk, size_t capacity);
+void stack_ctor_         (stack *stk, size_t capacity);
 #endif
 
-void stack_push   (stack *stk, elem_data_t elem);
+void stack_push          (stack *stk, elem_data_t elem);
 
-void stack_dtor   (stack *stk);
+void stack_dtor          (stack *stk);
 
-void stack_resize (stack *stk);
+void stack_resize        (stack *stk);
 
-void stack_pop    (stack *stk, elem_data_t *value);
+elem_data_t stack_pop    (stack *stk);
 
-void fill_data    (stack *stk);
+void fill_data           (stack *stk);
 
 #endif

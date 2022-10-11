@@ -1,6 +1,7 @@
-
 #include "stack.hpp"
 #include "debug.hpp"
+#include "utils_stk.hpp"
+
 
 static int file_status = FILE_CLOSE;
 FILE *logs_;
@@ -8,11 +9,11 @@ FILE *logs_;
 #if MODE == MODE_CANARY_ON || MODE == MODE_HASH_CANARY_ON
 elem_data_t *create_calloc_data(stack *stk) {
 
-    elem_canary_t *data = (elem_canary_t *) calloc(1,(sizeof(elem_canary_t) + sizeof(elem_data_t)*stk->capacity + sizeof(elem_canary_t)));
+    unsigned long long *data = (unsigned long long *) calloc(1,(sizeof(unsigned long long) + sizeof(elem_data_t)*stk->capacity + sizeof(unsigned long long)));
     
     data[0] = CANARIES_LEFT;
     data++;
-    
+
     char *point = (char *)data;
     point += stk->capacity*sizeof(elem_data_t);
     elem_canary_t *point_ = (elem_canary_t *)point;
@@ -31,8 +32,8 @@ void fill_data(stack *stk) {
 #endif
 static void open_file() {
 
-    const char *LOG_FILE = "/mnt/c/Users/User/Desktop/programs/processor/proc/log.txt";
-    // const char *LOG_FILE = "C://Users//User//Desktop//programs//processor//proc//log.txt";
+    const char *LOG_FILE = "/mnt/c/Users/User/Desktop/programs/stack/log.txt";
+    // const char *LOG_FILE = "C://Users//User//Desktop//programs//stack//log.txt";
     
     if (file_status == FILE_CLOSE) {
         logs_ = fopen(LOG_FILE, "w");
@@ -93,17 +94,14 @@ void stack_ctor_(stack *stk, size_t capacity)
         stk->hash_data = count_hash (stk->data, stk->capacity*sizeof(*stk->data));
         stk->hash_stk  = update_hash(stk);
     #endif
-
     ASSERT(stk);
   
 }
 
 void stack_dtor(stack *stk) {
 
-    // ASSERT(stk);
-
     #if MODE == MODE_CANARY_ON || MODE == MODE_HASH_CANARY_ON
-        stk->data--;
+        stk->data -= sizeof(elem_canary_t);
     #endif
 
     free(stk->data);
@@ -146,11 +144,11 @@ elem_data_t *stack_realloc_canari(stack *stk) {
     elem_canary_t *data = (elem_canary_t *)stk->data;
     data--;
 
-    data = (elem_canary_t *) realloc(data, sizeof(elem_data_t)*stk->capacity + 
-                                                2*sizeof(elem_canary_t));
+    data = (elem_canary_t *) realloc(data, sizeof(elem_canary_t) + sizeof(elem_data_t)*stk->capacity + sizeof(elem_canary_t));
 
     data[0] = CANARIES_LEFT;
     data++;
+
     char *point = (char *)data;
     point += stk->capacity*sizeof(elem_data_t);
     elem_canary_t *point_ = (elem_canary_t *)point;
@@ -189,13 +187,13 @@ void stack_resize(stack *stk) {
     ASSERT(stk);
 }
 
-void stack_pop(stack *stk, elem_data_t *value) {
+elem_data_t stack_pop(stack *stk) {
     ASSERT(stk);
 
     stk->size--;
-    *value = stk->data[stk->size];
+    elem_data_t value = stk->data[stk->size];
 
-    stk->data[stk->size] = POIZON;
+    // stk->data[stk->size] = POIZON;
     if (stk->size + 1 == stk->capacity/MULTIPLE && stk->size >= 10) 
         stack_resize(stk);
     
@@ -206,6 +204,7 @@ void stack_pop(stack *stk, elem_data_t *value) {
     #endif
     
     ASSERT(stk);
+    return value;
 }
 
 

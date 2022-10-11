@@ -1,124 +1,128 @@
 #include "assembler.hpp"
 #include "file.hpp"
 
-#define LEN_ARR_LABLES 10
-#define BIT_CONST 4
-#define BIT_REG 5
-#define BIT_RAW 6
+#define BIT_CONST 5
+#define BIT_REG 6
+#define BIT_RAW 7
+void get_args(prog *program, char *text_cmd, char *cmd, int *ip) {
+    if (strcmp(cmd, "push") == 0) {
+        text_cmd += strlen(cmd) + 1;
+        *ip -= 1;
 
+        int arg = 0;
+        char arg_reg_raw[10];
 
-void assembler(const char *file, prog *text_program) {
+        if (sscanf(text_cmd, "%s", arg_reg_raw) != 0) {
+            if (strncmp(arg_reg_raw, "[", 1) == 0) {
+            program->code[*ip] = program->code[*ip] | (1 << BIT_RAW);
+            text_cmd++;
+            }
+        }
+
+        if (sscanf(text_cmd, "%s", arg_reg_raw) != 0) {
+            if (strncmp(arg_reg_raw, "rax", 3) == 0) {
+                program->code[*ip] = program->code[*ip] | (1 << BIT_REG);
+                arg = 1;
+            } else if (strncmp(arg_reg_raw, "rbx", 3) == 0) {
+                program->code[*ip] = program->code[*ip] | (1 << BIT_REG);
+                arg = 2;
+            } else if (strncmp(arg_reg_raw, "rcx", 3) == 0) {
+                program->code[*ip] = program->code[*ip] | (1 << BIT_REG);
+                arg = 3;
+            } else if (strncmp(arg_reg_raw, "rdx", 3) == 0) {
+                program->code[*ip] = program->code[*ip] | (1 << BIT_REG);
+                arg = 4;
+            }
+        }
+
+        if (sscanf(text_cmd, "%d", &arg) != 0) {
+            program->code[*ip] = program->code[*ip] | (1 << BIT_CONST);
+        } 
+
+        *ip += 1;
+        program->code[*ip] = arg;
+        *ip += 1;
+
+    } else if (strcmp(cmd, "jmp") == 0) {
+        text_cmd += strlen(cmd) + 1;
+        int arg = 0;
+        if (sscanf(text_cmd, "%d", &arg) != 0) {
+            ;
+        } else if (*text_cmd == ':') {
+            text_cmd++;
+            int labl = 0;
+            sscanf(text_cmd, "%d", &labl);
+            arg = program->lables[labl];
+        }
+        program->code[*ip] = arg;
+        *ip += 1;
+
+    }
+}
+
+void assembler(const char *file, prog *program) {
     FILE *fp = fopen(file, "w+b");
     assert(fp != nullptr && "coudn't open file");
 
-    fprintf(fp, "%s %d %d\n", SIGNATURE, VERSION, text_program->NUMBER);
+    fprintf(fp, "%s %d %d\n", SIGNATURE, VERSION, program->NUMBER);
 
-    text_program->code = (int *) calloc(text_program->NUMBER * 2, sizeof(int));
+    program->code = (int *) calloc(program->NUMBER * 2, sizeof(int));
 
-    assert(text_program->code != nullptr && "null pointer");
+    assert(program->code != nullptr && "null pointer");
 
-    int lables[LEN_ARR_LABLES] = {};
+    
     char cmd[10]; 
     int ip = 0;
-    int len = 0;
     int labl = 0;
 
+    for (int i = 0; i < program->NUMBER; i++) {
+        if (sscanf(program->text[i], "%d", &labl) != 0) {
+            program->lables[labl] = i;
+        } else if (sscanf(program->text[i], "%s", cmd) != 0) {
+            if (strcmp(cmd, "push") == 0) {
+                program->code[ip++] = PUSH;
+                get_args(program, program->text[i], cmd, &ip);
+            } else if (strcmp(cmd, "hlt") == 0) {
+                program->code[ip++] = HLT;
 
-    for (int i = 0; i < text_program->NUMBER; i++) {
-        if (sscanf(text_program->text[i], "%d", &labl) != 0) {
-            // printf("%d", ip);
-            lables[labl] = i;
-        } else {
-        sscanf(text_program->text[i], "%s%n", cmd, &len);
+            } else if (strcmp(cmd, "add") == 0) {
+                program->code[ip++] = ADD;
 
+            } else if (strcmp(cmd, "sub") == 0) {
+                program->code[ip++] = SUB;
 
-        if (strncmp(cmd, "push", 4) == 0) {
-            text_program->code[ip] = PUSH;
-            text_program->text[i] += len;
+            } else if (strcmp(cmd, "mul") == 0) {
+                program->code[ip++] = MUL;
 
-            int arg = 0;
-            char arg_reg_raw[10];
-            if (sscanf(text_program->text[i], "%d", &arg) != 0) {
-                text_program->code[ip] = text_program->code[ip] | (1 << BIT_CONST);
-                ip++;
-                text_program->code[ip++] = arg;
-            } else if (sscanf(text_program->text[i], "%s", arg_reg_raw) != 0) {
-                if (strncmp(arg_reg_raw, "rax", 3) == 0) {
-                    text_program->code[ip] = text_program->code[ip] | (1 << BIT_REG);
-                    ip++;
-                    text_program->code[ip++] = 1;
-                } else if (strncmp(arg_reg_raw, "rbx", 3) == 0) {
-                    text_program->code[ip] = text_program->code[ip] | (1 << BIT_REG);
-                    ip++;
-                    text_program->code[ip++] = 2;
-                } else if (strncmp(arg_reg_raw, "rcx", 3) == 0) {
-                    text_program->code[ip] = text_program->code[ip] | (1 << BIT_REG);
-                    ip++;
-                    text_program->code[ip++] = 3;
-                } else if (strncmp(arg_reg_raw, "rdx", 3) == 0) {
-                    text_program->code[ip] = text_program->code[ip] | (1 << BIT_REG);
-                    ip++;
-                    text_program->code[ip++] = 4;
-                } else if (strncmp(arg_reg_raw, "[", 1) == 0) {
-                    text_program->code[ip] = text_program->code[ip] | (1 << BIT_RAW);
-                    ip++;
-                    text_program->text[i] += 2;
-                    sscanf(text_program->text[i], "%d", &arg);
-                    text_program->code[ip++] = arg;
-                }
-            } 
+            } else if (strcmp(cmd, "div") == 0) {
+                program->code[ip++] = DIV;
+            
+            } else if (strcmp(cmd, "out") == 0) {
+                program->code[ip++] = OUT;
 
-        } else if (strncmp(cmd, "hlt", 3) == 0) {
-            text_program->code[ip++] = HLT;
+            } else if (strcmp(cmd, "dump") == 0) {
+                program->code[ip++] = DUMP;
 
-        } else if (strncmp(cmd, "add", 3) == 0) {
-            text_program->code[ip++] = ADD;
+            } else if (strcmp(cmd, "in") == 0) {
+                program->code[ip++] = IN;
 
-        } else if (strncmp(cmd, "sub", 3) == 0) {
-            text_program->code[ip++] = SUB;
+            } else if (strcmp(cmd, "dup") == 0) {
+                program->code[ip++] = DUP;
 
-        } else if (strncmp(cmd, "mul", 3) == 0) {
-            text_program->code[ip++] = MUL;
-
-        } else if (strncmp(cmd, "div", 3) == 0) {
-            text_program->code[ip++] = DIV;
-        
-        } else if (strncmp(cmd, "out", 3) == 0) {
-            text_program->code[ip++] = OUT;
-
-        } else if (strncmp(cmd, "dump", 4) == 0) {
-            text_program->code[ip++] = DUMP;
-
-        } else if (strncmp(cmd, "in", 2) == 0) {
-            text_program->code[ip++] = IN;
-
-        } else if (strncmp(cmd, "dup", 3) == 0) {
-            text_program->code[ip++] = DUP;
-
-        } else if (strncmp(cmd, "jmp", 3) == 0) {
-            text_program->code[ip++] = JMP;
-            text_program->text[i] += len + 1;
-
-            int arg = 0;
-            if (sscanf(text_program->text[i], "%d", &arg) != 0) {
-                text_program->code[ip++] = arg;
-
-            } else if (*text_program->text[i] == ':') {
-                text_program->text[i]++;
-                sscanf(text_program->text[i], "%d", &labl);
-                text_program->code[ip++] = lables[labl];
+            } else if (strcmp(cmd, "jmp") == 0) {
+                program->code[ip++] = JMP;
+                get_args(program, program->text[i], cmd, &ip);
+            } else {
+                printf("comand didn't found\n");
             }
-        } else {
-            printf("comand didn't found\n");
-        }
         }
     }
 
     for (int i = 0; i < ip; i++) {
-        fprintf(fp, "%d ", text_program->code[i]);
+        fprintf(fp, "%d ", program->code[i]);
     }
 
-    printf_listing(text_program, ip);
+    printf_listing(program, ip);
 
     fprintf(fp, "\n");
     fclose(fp);

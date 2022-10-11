@@ -1,8 +1,8 @@
-push rax ;oiuytredsw
-push [10]
-add
-dump
-jmp :2
-div
+push 28
+2:
+mul
 out
+push 44
+add
+jmp :2
 hlt

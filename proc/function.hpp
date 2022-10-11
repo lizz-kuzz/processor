@@ -17,4 +17,9 @@ int      num_of_rows    (char *text);
 void     read_file      (const char *TEXT, prog *text);
 
 void     program_text_normalize (prog *text);
+
+void     free_all(prog *program);
+void     create_cmd(prog *program);
+
 #endif
+

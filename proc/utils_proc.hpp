@@ -7,28 +7,21 @@
 #include <string.h>
 #include <ctype.h>
 
+#include "../utils.hpp"
+
 #define SIGNATURE "CP"
-#define VERSION "2"
+#define VERSION "3"
+
+
 
 typedef struct {
     char    *text_buf;
     char   **arr_comand;
+    int     *cmd;
     int      NUMBER_OF_CMD;
     int      NUMBER_OF_ROW;
     long int SYMBOLS;
 } prog;
 
-
-enum comand_ass { 
-    HLT   = 0,
-    PUSH  = 1,
-    ADD   = 2,
-    SUB   = 3,
-    MUL   = 4,
-    DIV   = 5,
-    OUT   = 6,
-    DUMP  = 7,
-    IN    = 8,
-};
 
 #endif

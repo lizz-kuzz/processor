@@ -10,4 +10,5 @@ char *check_cmd(char *cmd);
 
 void printf_listing(prog *text_program, int count_cmd);
 
+void get_args(prog *program, char *text_cmd, char *cmd, int *ip);
 #endif

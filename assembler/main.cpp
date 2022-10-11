@@ -13,12 +13,6 @@ int main() {
 
     read_file(FILE_PROG, &program);
 
-    // char cmd[20];
-    // int n = 0;
-    // int k = 0;
-    // sscanf("4:", "%d%n", &k, &n);
-    // printf("%d\n%d", k, n);
- 
     assembler(FILE_ASS_OUTPUT, &program);
     
     free(program.code);

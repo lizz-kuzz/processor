@@ -1,6 +1,5 @@
 #include "debug.hpp"
 
-
 #if MODE == MODE_CANARY_ON || MODE == MODE_HASH_ON || MODE == MODE_HASH_CANARY_ON 
 void to_dump (stack *stk, FILE *log, const char *func, int line, const char *name_file) {
 
@@ -93,6 +92,13 @@ void printf_errors(stack *stk, FILE *log) {
 void assert_ok(stack *stk) {
 
     #if MODE != MODE_RELEASE
+
+    // #if MODE == HASH_ON || MODE == HASH_CANARY_ON
+    //     stk->hash_data = count_hash(stk->data, sizeof(*stk->data));
+    //     stk->hash_stk = count_hash (stk, sizeof(*stk) - sizeof(stk->canaries_right) - sizeof(stk->hash_stk) - sizeof(stk->hash_data)) ;
+    // #endif
+    // fprintf(logs_, "IN assert_ok\n  HASH_STK %llu\n",    stk->hash_stk );
+    // fprintf(logs_, "  HASH_STK пересчет %llu\n",    update_hash (stk));
         
         if (stk == nullptr) {
             stk->info.number_of_error = stk->info.number_of_error | (1 << NULL_POINT_TO_STACK);
@@ -127,7 +133,8 @@ void assert_ok(stack *stk) {
         if (stk->canaries_left != CANARIES_LEFT || stk->canaries_right != CANARIES_RIGHT) {
             stk->info.number_of_error = stk->info.number_of_error | (1 << ERROR_CANARIES_STK);        
         }
-        if (((elem_canary_t*)stk->data)[-1] != CANARIES_LEFT ||  (stk->data[stk->capacity]) != CANARIES_RIGHT) {
+        
+        if (((elem_canary_t*)stk->data)[-1] != CANARIES_LEFT ||  ((elem_canary_t *)stk->data)[stk->capacity] != CANARIES_RIGHT) {
             stk->info.number_of_error = stk->info.number_of_error | (1 << ERROR_CANARIES_DATA);               
         } 
     #endif
@@ -142,6 +149,8 @@ unsigned long long count_hash(void *data, size_t SIZE) {
     while (SIZE--)
     {
         hash += ((point[SIZE] << 5) + point[SIZE]);
+        // hash += point[SIZE];
+
     }
     return hash;
 }

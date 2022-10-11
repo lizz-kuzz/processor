@@ -7,30 +7,21 @@
 #include <string.h>
 #include <ctype.h>
 
+#include "../utils.hpp"
+
 #define SIGNATURE "CP"
 #define VERSION 3
+#define LEN_ARR_LABLES 10
+
 
 typedef struct {
     char    *text_buf;
     char   **text;
+    int      lables[LEN_ARR_LABLES];
     int     *code;
     int      NUMBER;
     long int SYMBOLS;
 } prog;
 
-
-enum comand_asm { 
-    HLT   = 0,
-    PUSH  = 1,
-    ADD   = 2,
-    SUB   = 3,
-    MUL   = 4,
-    DIV   = 5,
-    OUT   = 6,
-    DUMP  = 7,
-    IN    = 8,
-    JMP   = 9,
-    DUP   = 10,
-};
 
 #endif
