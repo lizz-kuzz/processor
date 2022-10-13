@@ -1,11 +1,13 @@
 #include "assembler.hpp"
 #include "file.hpp"
 
-#define MASK_CMD       0x1f
-#define BIT_CONST 5
-#define BIT_REG 6
-#define BIT_RAM 7
+#define MASK_CMD    0x1f
+#define BIT_CONST   5
+#define BIT_REG     6
+#define BIT_RAM     7
+
 void get_args(prog *program, char *text_cmd, char *cmd, int *ip) {
+
     if (strcmp(cmd, "PUSH") == 0) {
         text_cmd += strlen(cmd) + 1;
         *ip -= 1;
@@ -59,7 +61,8 @@ void get_args(prog *program, char *text_cmd, char *cmd, int *ip) {
 
     }
 }
-#define DEF_CMD(cmd_name, number_cmd, args)                             \
+
+#define DEF_CMD(cmd_name, number_cmd, args, ...)                        \
     if (strcmp(cmd, #cmd_name) == 0) {                                  \
         program->code[ip++] = number_cmd;                               \
         if (args) get_args(program, program->text[i], cmd, &ip);        \
@@ -104,14 +107,14 @@ void compail(const char *file, prog *program) {
 #undef DEF_CMD
 
 
-#define DEF_CMD(cmd_name, number_cmd, args)                                             \
-    case cmd_name:                                                                       \
+#define DEF_CMD(cmd_name, number_cmd, args, ...)                                        \
+    case cmd_name:                                                                      \
         fprintf(fp, "%02x", text_program->code[ip]);                                    \
         if (args)  {                                                                    \
             ip++;                                                                       \
-            fprintf(fp, "%10d %20s\n", text_program->code[ip], #cmd_name);  \
+            fprintf(fp, "%10d %20s\n", text_program->code[ip], #cmd_name);              \
         } else  {                                                                       \
-            fprintf(fp, "%30s\n", #cmd_name); }                            \
+            fprintf(fp, "%30s\n", #cmd_name); }                                         \
         break;                                                                          \
     
 

@@ -117,6 +117,13 @@ int get_arg(prog *program, int cmd, int *ip) {
     return arg;
 
 }
+
+#define DEF_CMD(cmd, number_cmd, arg, ...)      \
+    case cmd: {                                 \
+        __VA_ARGS__                             \
+        break;                                  \
+    } 
+
 void run_program(prog *program, stack *stk) {
     assert(program != nullptr && "null pointer");
 
@@ -125,69 +132,71 @@ void run_program(prog *program, stack *stk) {
     for (int ip = 0; ip < program->NUMBER_OF_ROW; ip++) {
         switch (program->cmd[ip] & MASK_CMD)
         {
-        case HLT: {
-            stack_dtor(stk);
-            break;
-        }
-        case PUSH: {
-            int arg = get_arg(program, program->cmd[ip], &ip);
-            stack_push(stk, arg);
-            break;
-        }
-        case ADD: {
-            int a = stack_pop(stk);
-            int b = stack_pop(stk);
-            stack_push(stk, a + b);    
-            break;
-        }
-        case SUB: {
-            int a = stack_pop(stk);
-            int b = stack_pop(stk);
+             #include "/mnt/c/Users/User/Desktop/programs/processor/config.hpp"
 
-            stack_push(stk, a - b);  
-            break;
-        }
-        case MUL: {
-            int a = stack_pop(stk);
-            int b = stack_pop(stk);
-            stack_push(stk, a * b);  
-            break;
-        }
-        case DIV: {
-            int a = stack_pop(stk);
-            int b = stack_pop(stk);
-            stack_push(stk, b / a);  
-            break;
-        }
-        case OUT: {
-            int a = stack_pop(stk);
-            printf("result %d\n", a);
-            break;
-        }
-        case IN: {
-            int a = 0;
-            scanf("%d", &a);
-            stack_push(stk, a);
-            break;
-        }  
-        case JMP: {
-            ip++;
-            int a = program->cmd[ip];
-            ip = a;
-            break;
-        }
-        case DUP: {
-            int a = stack_pop(stk);
-            stack_push(stk, a);
-            stack_push(stk, a);
-            break;
-        }
+        // case HLT: {
+        //     stack_dtor(stk);
+        //     break;
+        // }
+        // case PUSH: {
+        //     int arg = get_arg(program, program->cmd[ip], &ip);
+        //     stack_push(stk, arg);
+        //     break;
+        // }
+        // case ADD: {
+        //     int a = stack_pop(stk);
+        //     int b = stack_pop(stk);
+        //     stack_push(stk, a + b);    
+        //     break;
+        // }
+        // case SUB: {
+        //     int a = stack_pop(stk);
+        //     int b = stack_pop(stk);
+        //     stack_push(stk, a - b);  
+        //     break;
+        // }
+        // case MUL: {
+        //     int a = stack_pop(stk);
+        //     int b = stack_pop(stk);
+        //     stack_push(stk, a * b);  
+        //     break;
+        // }
+        // case DIV: {
+        //     int a = stack_pop(stk);
+        //     int b = stack_pop(stk);
+        //     stack_push(stk, b / a);  
+        //     break;
+        // }
+        // case OUT: {
+        //     int a = stack_pop(stk);
+        //     printf("result %d\n", a);
+        //     break;
+        // }
+        // case IN: {
+        //     int a = 0;
+        //     scanf("%d", &a);
+        //     stack_push(stk, a);
+        //     break;
+        // }  
+        // case JMP: {
+        //     ip++;
+        //     int a = program->cmd[ip];
+        //     ip = a;
+        //     break;
+        // }
+        // case DUP: {
+        //     int a = stack_pop(stk);
+        //     stack_push(stk, a);
+        //     stack_push(stk, a);
+        //     break;
+        // }
         default:
             printf("comand didn't found");
             break;
         }
     }
 }
+#undef DEF_CMD
 
 void free_all(prog *program) {
     assert(program != nullptr && "null pointer"); 
