@@ -13,6 +13,10 @@
 #define VERSION 3
 #define LEN_ARR_LABLES 10
 
+typedef struct {
+    char *mame_label;
+    int   ip;
+} lables;
 
 typedef struct {
     char    *text_buf;
@@ -21,7 +25,9 @@ typedef struct {
     int     *code;
     int      NUMBER;
     long int SYMBOLS;
+    // lables   lable;
 } prog;
+
 
 
 #endif

@@ -1,18 +1,13 @@
 #ifndef UTILS_HPP_INCLUDED
 #define UTILS_HPP_INCLUDED
 
+#define DEF_CMD(cmd, number_cmd, arg)    \
+        cmd = number_cmd,                \
 
 enum comand { 
-    HLT   = 0,
-    PUSH  = 1,
-    ADD   = 2,
-    SUB   = 3,
-    MUL   = 4,
-    DIV   = 5,
-    OUT   = 6,
-    IN    = 7,
-    JMP   = 8,
-    DUP   = 9,
+    #include "/mnt/c/Users/User/Desktop/programs/processor/config.hpp"
 };
+
+#undef DEF_CMD
 
 #endif

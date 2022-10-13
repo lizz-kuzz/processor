@@ -6,7 +6,7 @@
 #define BIT_REG 6
 #define BIT_RAM 7
 void get_args(prog *program, char *text_cmd, char *cmd, int *ip) {
-    if (strcmp(cmd, "push") == 0) {
+    if (strcmp(cmd, "PUSH") == 0) {
         text_cmd += strlen(cmd) + 1;
         *ip -= 1;
 
@@ -43,7 +43,7 @@ void get_args(prog *program, char *text_cmd, char *cmd, int *ip) {
         program->code[*ip] = arg;
         *ip += 1;
 
-    } else if (strcmp(cmd, "jmp") == 0) {
+    } else if (strcmp(cmd, "JMP") == 0) {
         text_cmd += strlen(cmd) + 1;
         int arg = 0;
         if (sscanf(text_cmd, "%d", &arg) != 0) {
@@ -59,6 +59,12 @@ void get_args(prog *program, char *text_cmd, char *cmd, int *ip) {
 
     }
 }
+#define DEF_CMD(cmd_name, number_cmd, args)                             \
+    if (strcmp(cmd, #cmd_name) == 0) {                                  \
+        program->code[ip++] = number_cmd;                               \
+        if (args) get_args(program, program->text[i], cmd, &ip);        \
+    } else
+
 
 void compail(const char *file, prog *program) {
     FILE *fp = fopen(file, "w+b");
@@ -79,39 +85,10 @@ void compail(const char *file, prog *program) {
         if (sscanf(program->text[i], "%d", &labl) != 0) {
             program->lables[labl] = ip;
         } else if (sscanf(program->text[i], "%s", cmd) != 0) {
-            if (strcmp(cmd, "push") == 0) {
-                program->code[ip++] = PUSH;
-                get_args(program, program->text[i], cmd, &ip);
-            } else if (strcmp(cmd, "hlt") == 0) {
-                program->code[ip++] = HLT;
 
-            } else if (strcmp(cmd, "add") == 0) {
-                program->code[ip++] = ADD;
-
-            } else if (strcmp(cmd, "sub") == 0) {
-                program->code[ip++] = SUB;
-
-            } else if (strcmp(cmd, "mul") == 0) {
-                program->code[ip++] = MUL;
-
-            } else if (strcmp(cmd, "div") == 0) {
-                program->code[ip++] = DIV;
-            
-            } else if (strcmp(cmd, "out") == 0) {
-                program->code[ip++] = OUT;
-
-            } else if (strcmp(cmd, "in") == 0) {
-                program->code[ip++] = IN;
-
-            } else if (strcmp(cmd, "dup") == 0) {
-                program->code[ip++] = DUP;
-
-            } else if (strcmp(cmd, "jmp") == 0) {
-                program->code[ip++] = JMP;
-                get_args(program, program->text[i], cmd, &ip);
-            } else {
-                printf("comand didn't found\n");
-            }
+            #include "/mnt/c/Users/User/Desktop/programs/processor/config.hpp"
+            /*else*/ printf("comand didn't found\n");
+        
         }
     }
 
@@ -124,6 +101,20 @@ void compail(const char *file, prog *program) {
     fprintf(fp, "\n");
     fclose(fp);
 }
+#undef DEF_CMD
+
+
+#define DEF_CMD(cmd_name, number_cmd, args)                                             \
+    case cmd_name:                                                                       \
+        fprintf(fp, "%02x", text_program->code[ip]);                                    \
+        if (args)  {                                                                    \
+            ip++;                                                                       \
+            fprintf(fp, "%10d %20s\n", text_program->code[ip], #cmd_name);  \
+        } else  {                                                                       \
+            fprintf(fp, "%30s\n", #cmd_name); }                            \
+        break;                                                                          \
+    
+
 
 void printf_listing(prog *text_program, int count_cmd) {
 
@@ -138,55 +129,7 @@ void printf_listing(prog *text_program, int count_cmd) {
         fprintf(fp, "%05d    ", ip);
         switch (text_program->code[ip] & MASK_CMD)
         {
-        case HLT:
-            fprintf(fp, "%02x           %s\n", text_program->code[ip], "HLT");
-            break;
-        case PUSH:
-            fprintf(fp, "%02x   ", text_program->code[ip]);
-            ip++;
-            fprintf(fp, "%02d      %s\n", text_program->code[ip], "PUSH");
-            break;
-        case (PUSH | (1 << BIT_CONST)):
-            fprintf(fp, "%02x   ", text_program->code[ip]);
-            ip++;
-            fprintf(fp, "%02d      %s\n", text_program->code[ip], "PUSH");
-            break;
-        case (PUSH | (1 << BIT_RAM)):
-            fprintf(fp, "%02x   ", text_program->code[ip]);
-            ip++;
-            fprintf(fp, "%02d      %s\n", text_program->code[ip], "PUSH");
-            break;
-        case (PUSH | (1 << BIT_REG)):
-            fprintf(fp, "%02x   ", text_program->code[ip]);
-            ip++;
-            fprintf(fp, "%02d      %s\n", text_program->code[ip], "PUSH");
-            break;
-        case ADD:
-            fprintf(fp, "%02x           %s\n", text_program->code[ip], "ADD");
-            break;
-        case SUB:
-            fprintf(fp, "%02x           %s\n", text_program->code[ip], "SUB");
-            break;
-        case MUL:
-            fprintf(fp, "%02x           %s\n", text_program->code[ip], "MUL");
-            break;
-        case DIV:
-            fprintf(fp, "%02x           %s\n", text_program->code[ip], "DIV");
-            break;
-        case OUT:
-            fprintf(fp, "%02x           %s\n", text_program->code[ip], "OUT");
-            break;
-        case IN:
-            fprintf(fp, "%02x           %s\n", text_program->code[ip], "IN");
-            break;
-        case JMP:
-            fprintf(fp, "%02x   ", text_program->code[ip]);
-            ip++;
-            fprintf(fp, "%02d      %s\n", text_program->code[ip], "JMP");
-            break;
-        case DUP:
-            fprintf(fp, "%02x           %s\n", text_program->code[ip++], "DUP");
-            break;      
+            #include "/mnt/c/Users/User/Desktop/programs/processor/config.hpp"      
         default:
             fprintf(fp, "didn't found comand\n");
             break;
@@ -197,3 +140,5 @@ void printf_listing(prog *text_program, int count_cmd) {
     fclose(fp);
 
 }
+
+#undef DEF_CMD

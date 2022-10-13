@@ -1,9 +1,11 @@
-push [10]
-push [rbx]
-add
-push 1
-push 2
-add
-mul
-out 
-hlt
+PUSH [10]
+PUSH 22222
+JMP :1
+ADD
+PUSH 1
+PUSH 2
+ADD
+MUL
+1:
+OUT 
+HLT
