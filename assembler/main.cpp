@@ -13,8 +13,10 @@ int main() {
 
     read_file(FILE_PROG, &program);
 
-    assembler(FILE_ASS_OUTPUT, &program);
+    compail(FILE_ASS_OUTPUT, &program);
     
+    compail(FILE_ASS_OUTPUT, &program);
+
     free(program.code);
     free(program.text);
     free(program.text_buf);

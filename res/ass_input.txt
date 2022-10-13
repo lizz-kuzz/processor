@@ -1,8 +1,9 @@
-push 28
-2:
-mul
-out
-push 44
+push [10]
+push [rbx]
 add
-jmp :2
+push 1
+push 2
+add
+mul
+out 
 hlt

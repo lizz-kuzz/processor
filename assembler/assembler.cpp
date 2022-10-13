@@ -1,35 +1,35 @@
 #include "assembler.hpp"
 #include "file.hpp"
 
+#define MASK_CMD       0x1f
 #define BIT_CONST 5
 #define BIT_REG 6
-#define BIT_RAW 7
+#define BIT_RAM 7
 void get_args(prog *program, char *text_cmd, char *cmd, int *ip) {
     if (strcmp(cmd, "push") == 0) {
         text_cmd += strlen(cmd) + 1;
         *ip -= 1;
 
         int arg = 0;
-        char arg_reg_raw[10];
+        char arg_reg_ram[10];
 
-        if (sscanf(text_cmd, "%s", arg_reg_raw) != 0) {
-            if (strncmp(arg_reg_raw, "[", 1) == 0) {
-            program->code[*ip] = program->code[*ip] | (1 << BIT_RAW);
+        if (sscanf(text_cmd, "%s", arg_reg_ram) != 0) {
+            if (strncmp(arg_reg_ram, "[", 1) == 0) {
+            program->code[*ip] = program->code[*ip] | (1 << BIT_RAM);
             text_cmd++;
             }
         }
-
-        if (sscanf(text_cmd, "%s", arg_reg_raw) != 0) {
-            if (strncmp(arg_reg_raw, "rax", 3) == 0) {
+        if (sscanf(text_cmd, "%s", arg_reg_ram) != 0) {
+            if (strncmp(arg_reg_ram, "rax", 3) == 0) {
                 program->code[*ip] = program->code[*ip] | (1 << BIT_REG);
                 arg = 1;
-            } else if (strncmp(arg_reg_raw, "rbx", 3) == 0) {
+            } else if (strncmp(arg_reg_ram, "rbx", 3) == 0) {
                 program->code[*ip] = program->code[*ip] | (1 << BIT_REG);
                 arg = 2;
-            } else if (strncmp(arg_reg_raw, "rcx", 3) == 0) {
+            } else if (strncmp(arg_reg_ram, "rcx", 3) == 0) {
                 program->code[*ip] = program->code[*ip] | (1 << BIT_REG);
                 arg = 3;
-            } else if (strncmp(arg_reg_raw, "rdx", 3) == 0) {
+            } else if (strncmp(arg_reg_ram, "rdx", 3) == 0) {
                 program->code[*ip] = program->code[*ip] | (1 << BIT_REG);
                 arg = 4;
             }
@@ -60,7 +60,7 @@ void get_args(prog *program, char *text_cmd, char *cmd, int *ip) {
     }
 }
 
-void assembler(const char *file, prog *program) {
+void compail(const char *file, prog *program) {
     FILE *fp = fopen(file, "w+b");
     assert(fp != nullptr && "coudn't open file");
 
@@ -77,7 +77,7 @@ void assembler(const char *file, prog *program) {
 
     for (int i = 0; i < program->NUMBER; i++) {
         if (sscanf(program->text[i], "%d", &labl) != 0) {
-            program->lables[labl] = i;
+            program->lables[labl] = ip;
         } else if (sscanf(program->text[i], "%s", cmd) != 0) {
             if (strcmp(cmd, "push") == 0) {
                 program->code[ip++] = PUSH;
@@ -99,9 +99,6 @@ void assembler(const char *file, prog *program) {
             
             } else if (strcmp(cmd, "out") == 0) {
                 program->code[ip++] = OUT;
-
-            } else if (strcmp(cmd, "dump") == 0) {
-                program->code[ip++] = DUMP;
 
             } else if (strcmp(cmd, "in") == 0) {
                 program->code[ip++] = IN;
@@ -139,7 +136,7 @@ void printf_listing(prog *text_program, int count_cmd) {
 
     for (int ip = 0; ip < count_cmd; ip++) {
         fprintf(fp, "%05d    ", ip);
-        switch (text_program->code[ip])
+        switch (text_program->code[ip] & MASK_CMD)
         {
         case HLT:
             fprintf(fp, "%02x           %s\n", text_program->code[ip], "HLT");
@@ -154,7 +151,7 @@ void printf_listing(prog *text_program, int count_cmd) {
             ip++;
             fprintf(fp, "%02d      %s\n", text_program->code[ip], "PUSH");
             break;
-        case (PUSH | (1 << BIT_RAW)):
+        case (PUSH | (1 << BIT_RAM)):
             fprintf(fp, "%02x   ", text_program->code[ip]);
             ip++;
             fprintf(fp, "%02d      %s\n", text_program->code[ip], "PUSH");
@@ -179,16 +176,13 @@ void printf_listing(prog *text_program, int count_cmd) {
         case OUT:
             fprintf(fp, "%02x           %s\n", text_program->code[ip], "OUT");
             break;
-        case DUMP:
-            fprintf(fp, "%02x           %s\n", text_program->code[ip], "DUMP");
-            break;
         case IN:
             fprintf(fp, "%02x           %s\n", text_program->code[ip], "IN");
             break;
         case JMP:
             fprintf(fp, "%02x   ", text_program->code[ip]);
             ip++;
-            fprintf(fp, "%02d     %s\n", text_program->code[ip], "JMP");
+            fprintf(fp, "%02d      %s\n", text_program->code[ip], "JMP");
             break;
         case DUP:
             fprintf(fp, "%02x           %s\n", text_program->code[ip++], "DUP");

@@ -12,11 +12,14 @@
 #define SIGNATURE "CP"
 #define VERSION "3"
 
-
+#define SIZE_RAW 20
+#define SIZE_REG 4
 
 typedef struct {
     char    *text_buf;
     char   **arr_comand;
+    int      ram[SIZE_RAW];
+    int      reg[SIZE_REG];
     int     *cmd;
     int      NUMBER_OF_CMD;
     int      NUMBER_OF_ROW;

@@ -4,14 +4,10 @@ FLAGS = -g -Wshadow -Winit-self -Wredundant-decls -Wcast-align -Wundef -Wfloat-e
 		-Wnon-virtual-dtor -Woverloaded-virtual -Wpointer-arith -Wsign-promo -Wstack-usage=8192 -Wstrict-aliasing -Wstrict-null-sentinel   \
 		-Wtype-limits -Wwrite-strings -D_DEBUG
 СС = g++
-# ass:
-# 	@$(CC) $(FLAGS) assembler/main.cpp assembler/file.cpp assembler/assembler.cpp -o ass.exe 
-# processor:
-# 	$(CC) $(FLAGS) proc/main.cpp proc/function.cpp proc/stack.cpp proc/debug.cpp  -o proc.exe 
 
 ass:
 	@$(СС) $(FLAGS) assembler/main.cpp assembler/file.cpp assembler/assembler.cpp -o ass.exe 
-processor:
-	$(СС) $(FLAGS) proc/main.cpp proc/function.cpp proc/stack.cpp proc/debug.cpp  -o proc.exe 
+cpu:
+	@$(СС) $(FLAGS) proc/main.cpp proc/function.cpp proc/stack.cpp proc/debug.cpp  -o cpu.exe 
 disass:
-	$(СС) $(FLAGS) disassembler/main.cpp assembler/file.cpp disassembler/disassembler.cpp -o disass.exe
+	@$(СС) $(FLAGS) disassembler/main.cpp assembler/file.cpp disassembler/disassembler.cpp -o disass.exe

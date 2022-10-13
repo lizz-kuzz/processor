@@ -2,7 +2,11 @@
 
 #define HEADER_SIZE 2
 
-// #define 
+#define MASK_CMD       0x1f
+#define MASK_ARG_REG   0x40
+#define MASK_ARG_RAM   0x80
+#define MASK_ARG_IMMED 0x20
+
 
 void read_file(const char *TEXT, prog *text) {
     FILE *file = fopen(TEXT, "r");
@@ -84,6 +88,7 @@ int check_version(prog *program) {
 
     return 0;
 }
+
 void create_cmd(prog *program) {
     assert(program != nullptr && "null pointer");
     int ip = 0;
@@ -93,22 +98,40 @@ void create_cmd(prog *program) {
         ip++;
     }
 }
+int get_arg(prog *program, int cmd, int *ip) {
+    assert(program != nullptr && "null pointer");
+    int arg = 0;
+        *ip += 1;
+    
+    if (cmd & MASK_ARG_IMMED) {
+        arg += program->cmd[*ip];
+    }
+    if (cmd & MASK_ARG_REG) {
+        arg += program->reg[program->cmd[*ip]];
+    }
+    if (cmd & MASK_ARG_RAM) {
+        arg = program->ram[arg];
+    }
+    // printf("%d\n", arg);
+    // *ip+= 1;
+    return arg;
 
-void realization_program(prog *program, stack *stk) {
+}
+void run_program(prog *program, stack *stk) {
     assert(program != nullptr && "null pointer");
 
     create_cmd(program);
 
     for (int ip = 0; ip < program->NUMBER_OF_ROW; ip++) {
-        switch (program->cmd[ip])
+        switch (program->cmd[ip] & MASK_CMD)
         {
         case HLT: {
             stack_dtor(stk);
             break;
         }
-        case 17: {
-            ip++;
-            stack_push(stk, program->cmd[ip]);
+        case PUSH: {
+            int arg = get_arg(program, program->cmd[ip], &ip);
+            stack_push(stk, arg);
             break;
         }
         case ADD: {
@@ -138,12 +161,7 @@ void realization_program(prog *program, stack *stk) {
         }
         case OUT: {
             int a = stack_pop(stk);
-            if (a < 100) printf("result %d\n", a);
-            break;
-        }
-        case DUMP: {
-            // dump()
-
+            printf("result %d\n", a);
             break;
         }
         case IN: {

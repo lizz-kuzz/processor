@@ -4,22 +4,25 @@
 #include "stack.hpp"
 #include "debug.hpp"
 
-int      check_version(prog *program);
+int      check_version           (prog *program);
 
-void     create_arr_cmd(prog *text);
+void     create_arr_cmd          (prog *text);
 
-void     realization_program(prog *program, stack *stk);
+void     run_program             (prog *program, stack *stk);
 
-long int count_symbols  (FILE *file);
+long int count_symbols           (FILE *file);
 
-int      num_of_rows    (char *text);
+int      num_of_rows             (char *text);
 
-void     read_file      (const char *TEXT, prog *text);
+void     read_file               (const char *TEXT, prog *text);
 
-void     program_text_normalize (prog *text);
+void     program_text_normalize  (prog *text);
 
-void     free_all(prog *program);
-void     create_cmd(prog *program);
+int      get_arg                 (prog *program, int cmd, int *ip);
+
+void     free_all                (prog *program);
+
+void     create_cmd              (prog *program);
 
 #endif
 

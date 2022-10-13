@@ -10,10 +10,9 @@ enum comand {
     MUL   = 4,
     DIV   = 5,
     OUT   = 6,
-    DUMP  = 7,
-    IN    = 8,
-    JMP   = 9,
-    DUP   = 10,
+    IN    = 7,
+    JMP   = 8,
+    DUP   = 9,
 };
 
 #endif

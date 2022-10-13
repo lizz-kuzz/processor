@@ -3,10 +3,7 @@
 
 #include "utils_ass.hpp"
 
-void assembler(const char *file, prog *text_program);
-
-
-char *check_cmd(char *cmd);
+void compail(const char *file, prog *text_program);
 
 void printf_listing(prog *text_program, int count_cmd);
 
