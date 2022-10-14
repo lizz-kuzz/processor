@@ -118,6 +118,23 @@ int get_arg(prog *program, int cmd, int *ip) {
 
 }
 
+
+void pop_arg (prog *program, int cmd, int arg, int *ip) {
+    assert(program != nullptr && "null pointer");
+        *ip += 1;
+    if (cmd & MASK_ARG_IMMED) {
+        ;
+    }
+    if (cmd & MASK_ARG_REG) {
+        program->reg[program->cmd[*ip]] = arg;
+    } 
+    if (cmd & MASK_ARG_RAM) {
+        program->ram[program->cmd[*ip]] = arg;
+    }
+}
+
+
+
 #define DEF_CMD(cmd, number_cmd, arg, ...)      \
     case cmd: {                                 \
         __VA_ARGS__                             \

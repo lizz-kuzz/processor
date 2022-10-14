@@ -9,7 +9,7 @@
 
 void get_args(prog *program, char *text_cmd, char *cmd, int *ip) {
     // printf("%s\n", cmd);
-    if (strcmp(cmd, "PUSH") == 0) {
+    if (strcmp(cmd, "PUSH") == 0 || strcmp(cmd, "POP") == 0) {
         text_cmd += strlen(cmd) + 1;
         *ip -= 1;
 
@@ -72,6 +72,7 @@ void get_args(prog *program, char *text_cmd, char *cmd, int *ip) {
         program->code[*ip] = arg;
         *ip += 1;
     }
+
 }
 
 void my_strcpy_for_lable(char *text_for_cpy, char *text) {
@@ -79,6 +80,8 @@ void my_strcpy_for_lable(char *text_for_cpy, char *text) {
         *text++ = *text_for_cpy++;
     }
 }
+
+
 
 #define DEF_CMD(cmd_name, number_cmd, args, ...)                        \
     if (strcmp(cmd, #cmd_name) == 0) {                                  \

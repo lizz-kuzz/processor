@@ -24,5 +24,7 @@ void     free_all                (prog *program);
 
 void     create_cmd              (prog *program);
 
+void     pop_arg                 (prog *program, int cmd, int arg, int *ip);
+
 #endif
 
