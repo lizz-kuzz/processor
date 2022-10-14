@@ -32,7 +32,7 @@ void fill_data(stack *stk) {
 #endif
 static void open_file() {
 
-    const char *LOG_FILE = "/mnt/c/Users/User/Desktop/programs/stack/log.txt";
+    const char *LOG_FILE = "/mnt/c/Users/User/Desktop/programs/processor/res/log.txt";
     // const char *LOG_FILE = "C://Users//User//Desktop//programs//stack//log.txt";
     
     if (file_status == FILE_CLOSE) {
@@ -121,12 +121,12 @@ void stack_dtor(stack *stk) {
 
 void stack_push(stack *stk, elem_data_t elem) {
 
-    ASSERT(stk);
+    // ASSERT(stk);
 
     if (stk->size >= stk->capacity) 
         stack_resize(stk);
     stk->data[stk->size] = elem;
-    (stk->size)++;
+    stk->size++;
 
     #if MODE == MODE_HASH_ON || MODE == MODE_HASH_CANARY_ON
         stk->hash_stk = 0;
@@ -160,7 +160,7 @@ elem_data_t *stack_realloc_canari(stack *stk) {
 
 void stack_resize(stack *stk) {
 
-    ASSERT(stk);
+    // ASSERT(stk);
 
     if (stk->capacity == stk->size) {
         stk->capacity *= MULTIPLE;

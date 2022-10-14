@@ -1,19 +1,24 @@
 #define POP stack_pop(stk)
 
-#define PUSH(num) stack_push(stk, num)
+#define PUSH_(num) stack_push(stk, num)
+
+#define JUMP                           \
+        ip++;                          \
+        int ind = program->cmd[ip];    \
+        ip = ind - 1;                  \
 
 #define JUMP_COND(sign)                \
-        if (POP sign POP) {            \
-            ip++;                      \
-            int a = program->cmd[ip];  \
-            ip = a;                    \
-        }                              \
+        int a = POP;                   \
+        int b = POP;                   \
+        if (b sign a)                  \
+            JUMP                            
         
 
-#define OPERATION(sign)  \
-        int a = POP;     \
-        int b = POP;     \
-        PUSH(b sign a);     \
+#define OPERATION(sign)                \
+        int a = POP;                   \
+        int b = POP;                   \
+        int c = b sign a;              \
+        PUSH_(c);                
 
 
 DEF_CMD(HLT, 0, 0,
@@ -21,7 +26,7 @@ DEF_CMD(HLT, 0, 0,
 
 DEF_CMD(PUSH, 1, 1, 
         {int arg = get_arg(program, program->cmd[ip], &ip);
-        PUSH(arg);})
+        PUSH_(arg);})
 
 DEF_CMD(ADD, 2, 0, OPERATION(+))
 
@@ -38,17 +43,14 @@ DEF_CMD(OUT, 6, 0,
 DEF_CMD(IN, 7, 0,
         {int a = 0;
         scanf("%d", &a);
-        PUSH(a);})
+        PUSH_(a);})
 
-DEF_CMD(JMP, 8, 1, 
-        {ip++;
-        int a = program->cmd[ip];
-        ip = a;})
+DEF_CMD(JMP, 8, 1, JUMP)
 
 DEF_CMD(DUP, 9, 0,             
         {int a = POP;
-        PUSH(a);
-        PUSH(a);})
+        PUSH_(a);
+        PUSH_(a);})
 
 DEF_CMD(JB, 10, 1, JUMP_COND(<))
 

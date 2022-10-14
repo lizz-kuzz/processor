@@ -22,7 +22,7 @@
 // #ifdef DEBUG
 //     #define MODE MODE_HASH_CANARY_ON
 // #endif
-#define MODE MODE_RELEASE
+#define MODE MODE_HASH_ON
 #define MULTIPLE       2
 
 

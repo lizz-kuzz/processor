@@ -1,0 +1,339 @@
+
+stack_ctor_() at proc/stack.cpp(97)
+Stack[0x7ffd7b7c8310] (ERROR!!!) "stk" at main() at proc/main.cpp(18) 
+ERROR CANARIES IN DATA
+  size = 0
+  capacity = 15
+  data [0x557471421498]
+
+
+stack_push() at proc/stack.cpp(124)
+Stack[0x7ffd7b7c8310] (ERROR!!!) "stk" at main() at proc/main.cpp(18) 
+ERROR CANARIES IN DATA
+  size = 0
+  capacity = 15
+  data [0x557471421498]
+
+
+stack_push() at proc/stack.cpp(137)
+Stack[0x7ffd7b7c8310] (ERROR!!!) "stk" at main() at proc/main.cpp(18) 
+ERROR CANARIES IN DATA
+  size = 1
+  capacity = 15
+  data [0x557471421498]
+
+
+stack_push() at proc/stack.cpp(124)
+Stack[0x7ffd7b7c8310] (ERROR!!!) "stk" at main() at proc/main.cpp(18) 
+ERROR CANARIES IN DATA
+  size = 1
+  capacity = 15
+  data [0x557471421498]
+
+
+stack_push() at proc/stack.cpp(137)
+Stack[0x7ffd7b7c8310] (ERROR!!!) "stk" at main() at proc/main.cpp(18) 
+ERROR CANARIES IN DATA
+  size = 2
+  capacity = 15
+  data [0x557471421498]
+
+
+stack_pop() at proc/stack.cpp(191)
+Stack[0x7ffd7b7c8310] (ERROR!!!) "stk" at main() at proc/main.cpp(18) 
+ERROR CANARIES IN DATA
+  size = 2
+  capacity = 15
+  data [0x557471421498]
+
+
+stack_pop() at proc/stack.cpp(206)
+Stack[0x7ffd7b7c8310] (ERROR!!!) "stk" at main() at proc/main.cpp(18) 
+ERROR CANARIES IN DATA
+  size = 1
+  capacity = 15
+  data [0x557471421498]
+
+
+stack_pop() at proc/stack.cpp(191)
+Stack[0x7ffd7b7c8310] (ERROR!!!) "stk" at main() at proc/main.cpp(18) 
+ERROR CANARIES IN DATA
+  size = 1
+  capacity = 15
+  data [0x557471421498]
+
+
+stack_pop() at proc/stack.cpp(206)
+Stack[0x7ffd7b7c8310] (ERROR!!!) "stk" at main() at proc/main.cpp(18) 
+ERROR CANARIES IN DATA
+  size = 0
+  capacity = 15
+  data [0x557471421498]
+
+
+stack_push() at proc/stack.cpp(124)
+Stack[0x7ffd7b7c8310] (ERROR!!!) "stk" at main() at proc/main.cpp(18) 
+ERROR CANARIES IN DATA
+  size = 0
+  capacity = 15
+  data [0x557471421498]
+
+
+stack_push() at proc/stack.cpp(137)
+Stack[0x7ffd7b7c8310] (ERROR!!!) "stk" at main() at proc/main.cpp(18) 
+ERROR CANARIES IN DATA
+  size = 1
+  capacity = 15
+  data [0x557471421498]
+
+
+stack_pop() at proc/stack.cpp(191)
+Stack[0x7ffd7b7c8310] (ERROR!!!) "stk" at main() at proc/main.cpp(18) 
+ERROR CANARIES IN DATA
+  size = 1
+  capacity = 15
+  data [0x557471421498]
+
+
+stack_pop() at proc/stack.cpp(206)
+Stack[0x7ffd7b7c8310] (ERROR!!!) "stk" at main() at proc/main.cpp(18) 
+ERROR CANARIES IN DATA
+  size = 0
+  capacity = 15
+  data [0x557471421498]
+
+
+stack_push() at proc/stack.cpp(124)
+Stack[0x7ffd7b7c8310] (ERROR!!!) "stk" at main() at proc/main.cpp(18) 
+ERROR CANARIES IN DATA
+  size = 0
+  capacity = 15
+  data [0x557471421498]
+
+
+stack_push() at proc/stack.cpp(137)
+Stack[0x7ffd7b7c8310] (ERROR!!!) "stk" at main() at proc/main.cpp(18) 
+ERROR CANARIES IN DATA
+  size = 1
+  capacity = 15
+  data [0x557471421498]
+
+
+stack_push() at proc/stack.cpp(124)
+Stack[0x7ffd7b7c8310] (ERROR!!!) "stk" at main() at proc/main.cpp(18) 
+ERROR CANARIES IN DATA
+  size = 1
+  capacity = 15
+  data [0x557471421498]
+
+
+stack_push() at proc/stack.cpp(137)
+Stack[0x7ffd7b7c8310] (ERROR!!!) "stk" at main() at proc/main.cpp(18) 
+ERROR CANARIES IN DATA
+  size = 2
+  capacity = 15
+  data [0x557471421498]
+
+
+stack_push() at proc/stack.cpp(124)
+Stack[0x7ffd7b7c8310] (ERROR!!!) "stk" at main() at proc/main.cpp(18) 
+ERROR CANARIES IN DATA
+  size = 2
+  capacity = 15
+  data [0x557471421498]
+
+
+stack_push() at proc/stack.cpp(137)
+Stack[0x7ffd7b7c8310] (ERROR!!!) "stk" at main() at proc/main.cpp(18) 
+ERROR CANARIES IN DATA
+  size = 3
+  capacity = 15
+  data [0x557471421498]
+
+
+stack_pop() at proc/stack.cpp(191)
+Stack[0x7ffd7b7c8310] (ERROR!!!) "stk" at main() at proc/main.cpp(18) 
+ERROR CANARIES IN DATA
+  size = 3
+  capacity = 15
+  data [0x557471421498]
+
+
+stack_pop() at proc/stack.cpp(206)
+Stack[0x7ffd7b7c8310] (ERROR!!!) "stk" at main() at proc/main.cpp(18) 
+ERROR CANARIES IN DATA
+  size = 2
+  capacity = 15
+  data [0x557471421498]
+
+
+stack_pop() at proc/stack.cpp(191)
+Stack[0x7ffd7b7c8310] (ERROR!!!) "stk" at main() at proc/main.cpp(18) 
+ERROR CANARIES IN DATA
+  size = 2
+  capacity = 15
+  data [0x557471421498]
+
+
+stack_pop() at proc/stack.cpp(206)
+Stack[0x7ffd7b7c8310] (ERROR!!!) "stk" at main() at proc/main.cpp(18) 
+ERROR CANARIES IN DATA
+  size = 1
+  capacity = 15
+  data [0x557471421498]
+
+
+stack_push() at proc/stack.cpp(124)
+Stack[0x7ffd7b7c8310] (ERROR!!!) "stk" at main() at proc/main.cpp(18) 
+ERROR CANARIES IN DATA
+  size = 1
+  capacity = 15
+  data [0x557471421498]
+
+
+stack_push() at proc/stack.cpp(137)
+Stack[0x7ffd7b7c8310] (ERROR!!!) "stk" at main() at proc/main.cpp(18) 
+ERROR CANARIES IN DATA
+  size = 2
+  capacity = 15
+  data [0x557471421498]
+
+
+stack_pop() at proc/stack.cpp(191)
+Stack[0x7ffd7b7c8310] (ERROR!!!) "stk" at main() at proc/main.cpp(18) 
+ERROR CANARIES IN DATA
+  size = 2
+  capacity = 15
+  data [0x557471421498]
+
+
+stack_pop() at proc/stack.cpp(206)
+Stack[0x7ffd7b7c8310] (ERROR!!!) "stk" at main() at proc/main.cpp(18) 
+ERROR CANARIES IN DATA
+  size = 1
+  capacity = 15
+  data [0x557471421498]
+
+
+stack_pop() at proc/stack.cpp(191)
+Stack[0x7ffd7b7c8310] (ERROR!!!) "stk" at main() at proc/main.cpp(18) 
+ERROR CANARIES IN DATA
+  size = 1
+  capacity = 15
+  data [0x557471421498]
+
+
+stack_pop() at proc/stack.cpp(206)
+Stack[0x7ffd7b7c8310] (ERROR!!!) "stk" at main() at proc/main.cpp(18) 
+ERROR CANARIES IN DATA
+  size = 0
+  capacity = 15
+  data [0x557471421498]
+
+
+stack_push() at proc/stack.cpp(124)
+Stack[0x7ffd7b7c8310] (ERROR!!!) "stk" at main() at proc/main.cpp(18) 
+ERROR CANARIES IN DATA
+  size = 0
+  capacity = 15
+  data [0x557471421498]
+
+
+stack_push() at proc/stack.cpp(137)
+Stack[0x7ffd7b7c8310] (ERROR!!!) "stk" at main() at proc/main.cpp(18) 
+ERROR CANARIES IN DATA
+  size = 1
+  capacity = 15
+  data [0x557471421498]
+
+
+stack_pop() at proc/stack.cpp(191)
+Stack[0x7ffd7b7c8310] (ERROR!!!) "stk" at main() at proc/main.cpp(18) 
+ERROR CANARIES IN DATA
+  size = 1
+  capacity = 15
+  data [0x557471421498]
+
+
+stack_pop() at proc/stack.cpp(206)
+Stack[0x7ffd7b7c8310] (ERROR!!!) "stk" at main() at proc/main.cpp(18) 
+ERROR CANARIES IN DATA
+  size = 0
+  capacity = 15
+  data [0x557471421498]
+
+
+stack_pop() at proc/stack.cpp(191)
+Stack[0x7ffd7b7c8310] (ERROR!!!) "stk" at main() at proc/main.cpp(18) 
+ERROR CANARIES IN DATA
+  size = 0
+  capacity = 15
+  data [0x557471421498]
+
+
+stack_pop() at proc/stack.cpp(206)
+Stack[0x7ffd7b7c8310] (ERROR!!!) "stk" at main() at proc/main.cpp(18) 
+SIZE MORE THAN CAPACITY
+(ERROR!!!) "stk" at main() at proc/main.cpp(18) 
+SIZE OR CAPACITY NEGATIVE
+(ERROR!!!) "stk" at main() at proc/main.cpp(18) 
+ERROR CANARIES IN DATA
+  size = 18446744073709551615
+  capacity = 15
+  data [0x557471421498]
+
+
+stack_push() at proc/stack.cpp(124)
+Stack[0x7ffd7b7c8310] (ERROR!!!) "stk" at main() at proc/main.cpp(18) 
+SIZE MORE THAN CAPACITY
+(ERROR!!!) "stk" at main() at proc/main.cpp(18) 
+SIZE OR CAPACITY NEGATIVE
+(ERROR!!!) "stk" at main() at proc/main.cpp(18) 
+ERROR CANARIES IN DATA
+  size = 18446744073709551615
+  capacity = 15
+  data [0x557471421498]
+
+
+stack_resize() at proc/stack.cpp(163)
+Stack[0x7ffd7b7c8310] (ERROR!!!) "stk" at main() at proc/main.cpp(18) 
+SIZE MORE THAN CAPACITY
+(ERROR!!!) "stk" at main() at proc/main.cpp(18) 
+SIZE OR CAPACITY NEGATIVE
+(ERROR!!!) "stk" at main() at proc/main.cpp(18) 
+ERROR CANARIES IN DATA
+  size = 18446744073709551615
+  capacity = 15
+  data [0x557471421498]
+
+
+stack_resize() at proc/stack.cpp(187)
+Stack[0x7ffd7b7c8310] (ERROR!!!) "stk" at main() at proc/main.cpp(18) 
+SIZE MORE THAN CAPACITY
+(ERROR!!!) "stk" at main() at proc/main.cpp(18) 
+SIZE OR CAPACITY NEGATIVE
+(ERROR!!!) "stk" at main() at proc/main.cpp(18) 
+ERROR CANARIES IN DATA
+  size = 18446744073709551615
+  capacity = 15
+  data [0x557471421498]
+
+
+stack_push() at proc/stack.cpp(137)
+Stack[0x7ffd7b7c8310] (ERROR!!!) "stk" at main() at proc/main.cpp(18) 
+SIZE MORE THAN CAPACITY
+(ERROR!!!) "stk" at main() at proc/main.cpp(18) 
+SIZE OR CAPACITY NEGATIVE
+(ERROR!!!) "stk" at main() at proc/main.cpp(18) 
+ERROR CANARIES IN DATA
+  size = 0
+  capacity = 15
+  data [0x557471421498]
+
+
+stack_pop() at proc/stack.cpp(191)
+Stack[0x7ffd7b7c8310] (ERROR!!!) "stk" at main() at proc/main.cpp(18) 
+SIZE MORE THAN CAPACITY
+(ERROR!!!) "stk" at main() at proc/main.cpp(18) 
+SIZE OR CAPACITY NEGATIVE
+(ERROR!!!) "stk" at main() at proc/main.cpp(18)
