@@ -107,10 +107,9 @@ void compail(const char *file, prog *program) {
         if (strchr(program->text[i], ':') != 0 ) {
             program->arr_text_lab[ind_labl].mame_label = (char *) calloc(strlen(program->text[i]), sizeof(char));
             my_strcpy_for_lable(program->text[i], program->arr_text_lab[ind_labl].mame_label);
-            program->arr_text_lab[ind_labl].ip = i;
-            // printf("%d", program->arr_text_lab[ind_labl].ip);
+            program->arr_text_lab[ind_labl].ip = ip;
+            // printf(" in comp %d", program->arr_text_lab[ind_labl].ip);
             ind_labl++;
-            // program->lables[labl] = ip; 
         } else if (sscanf(program->text[i], "%s", cmd) != 0) {
 
             #include "/mnt/c/Users/User/Desktop/programs/processor/config.hpp"

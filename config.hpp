@@ -65,5 +65,7 @@ DEF_CMD(JE, 14, 1, JUMP_COND(==))
 DEF_CMD(JNE, 15, 1, JUMP_COND(!=))
 
 
+// DEF_CMD(CALL, 16, 1, )
+
 
 
