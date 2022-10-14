@@ -1,15 +1,11 @@
 PUSH 1
 PUSH 2
-ADD
-DUP
-DUP 
-PUSH 1
-JA :1
+JA call
 OUT 
 PUSH 1
 PUSH 2
 ADD
 MUL
-1:
+call:
 OUT 
 HLT

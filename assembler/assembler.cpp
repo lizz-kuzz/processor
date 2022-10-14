@@ -5,9 +5,10 @@
 #define BIT_CONST   5
 #define BIT_REG     6
 #define BIT_RAM     7
+#define LEN_LABLE  15
 
 void get_args(prog *program, char *text_cmd, char *cmd, int *ip) {
-
+    // printf("%s\n", cmd);
     if (strcmp(cmd, "PUSH") == 0) {
         text_cmd += strlen(cmd) + 1;
         *ip -= 1;
@@ -46,20 +47,36 @@ void get_args(prog *program, char *text_cmd, char *cmd, int *ip) {
         *ip += 1;
 
     } else if (strncmp(cmd, "J", 1) == 0) {
-        printf("kjhg");
         text_cmd += strlen(cmd) + 1;
         int arg = 0;
+        char *name_lable = (char *) calloc(LEN_LABLE, sizeof(char));
+
         if (sscanf(text_cmd, "%d", &arg) != 0) {
             ;
-        } else if (*text_cmd == ':') {
-            text_cmd++;
-            int labl = 0;
-            sscanf(text_cmd, "%d", &labl);
-            arg = program->lables[labl];
+        // } else if (*text_cmd == ':') {
+            // char *name_lable;
+
+            // text_cmd++;
+            // int labl = 0;
+            // text_cmd++;
+            // sscanf(text_cmd, "%d", &labl);
+            // arg = program->lables[labl];
+        } else if (sscanf(text_cmd, "%s", name_lable) != 0) {
+
+            int i = 0;
+            for (i = 0; i < LEN_ARR_LABLES && program->arr_text_lab[i].mame_label != NULL ; i++) {
+                if (strcmp(name_lable, program->arr_text_lab[i].mame_label) == 0) break;
+            }
+            arg = program->arr_text_lab[i].ip;
         }
         program->code[*ip] = arg;
         *ip += 1;
+    }
+}
 
+void my_strcpy_for_lable(char *text_for_cpy, char *text) {
+    for (; *text_for_cpy != '\0' && *text_for_cpy != ':'; ) {
+        *text++ = *text_for_cpy++;
     }
 }
 
@@ -68,6 +85,7 @@ void get_args(prog *program, char *text_cmd, char *cmd, int *ip) {
         program->code[ip++] = number_cmd;                               \
         if (args) get_args(program, program->text[i], cmd, &ip);        \
     } else
+
 
 
 void compail(const char *file, prog *program) {
@@ -83,11 +101,16 @@ void compail(const char *file, prog *program) {
     
     char cmd[10]; 
     int ip = 0;
-    int labl = 0;
+    int ind_labl = 0;
 
     for (int i = 0; i < program->NUMBER; i++) {
-        if (sscanf(program->text[i], "%d", &labl) != 0) {
-            program->lables[labl] = ip;
+        if (strchr(program->text[i], ':') != 0 ) {
+            program->arr_text_lab[ind_labl].mame_label = (char *) calloc(strlen(program->text[i]), sizeof(char));
+            my_strcpy_for_lable(program->text[i], program->arr_text_lab[ind_labl].mame_label);
+            program->arr_text_lab[ind_labl].ip = i;
+            // printf("%d", program->arr_text_lab[ind_labl].ip);
+            ind_labl++;
+            // program->lables[labl] = ip; 
         } else if (sscanf(program->text[i], "%s", cmd) != 0) {
 
             #include "/mnt/c/Users/User/Desktop/programs/processor/config.hpp"

@@ -16,7 +16,6 @@ int main() {
     // const char *FILE_ASS_OUTPUT = "C://Users//User//Desktop//programs//processor//res//ass.output";
 
     read_file(FILE_PROG, &program);
-    printf("%d", strcmp("push", "PUSH"));
     compail(FILE_ASS_OUTPUT, &program);
     compail(FILE_ASS_OUTPUT, &program);
 
