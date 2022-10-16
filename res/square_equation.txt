@@ -1,0 +1,8 @@
+IN    ;ввод a, b, c
+IN 
+IN
+PUSH rcx
+PUSH rbx
+PUSH rax
+
+HLT

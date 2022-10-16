@@ -93,5 +93,11 @@ DEF_CMD(RET, 18, 0,
         ip = stack_pop(&stk_ip) - 1;
         })
 
+DEF_CMD(SQR, 19, 0, 
+        {
+        int num = POP_;
+        num = sqrt(num);
+        PUSH_(num);
+        })
 
 

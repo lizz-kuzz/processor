@@ -158,6 +158,7 @@ int run_program(prog *program, stack *stk) {
             break;
         }
     }
+    return 0;
 }
 #undef DEF_CMD
 
