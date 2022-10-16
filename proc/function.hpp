@@ -8,7 +8,7 @@ int      check_version           (prog *program);
 
 void     create_arr_cmd          (prog *text);
 
-void     run_program             (prog *program, stack *stk);
+int      run_program             (prog *program, stack *stk);
 
 long int count_symbols           (FILE *file);
 
@@ -25,6 +25,9 @@ void     free_all                (prog *program);
 void     create_cmd              (prog *program);
 
 void     pop_arg                 (prog *program, int cmd, int arg, int *ip);
+
+void     get_arg_call            (prog *program, int cmd, int *ip);
+
 
 #endif
 

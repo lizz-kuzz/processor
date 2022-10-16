@@ -8,15 +8,15 @@
         ip = ind - 1;                  \
 
 #define JUMP_COND(sign)                \
-        int a = POP_;                   \
-        int b = POP_;                   \
+        int a = POP_;                  \
+        int b = POP_;                  \
         if (b sign a)                  \
             JUMP                            
         
 
 #define OPERATION(sign)                \
-        int a = POP_;                   \
-        int b = POP_;                   \
+        int a = POP_;                  \
+        int b = POP_;                  \
         int c = b sign a;              \
         PUSH_(c);                
 
@@ -24,6 +24,7 @@
 DEF_CMD(HLT, 0, 0,
         {
         stack_dtor(stk);
+        return 0;
         })
 
 DEF_CMD(PUSH, 1, 1, 
@@ -78,7 +79,19 @@ DEF_CMD(POP, 16, 1,
         int arg = POP_;
         pop_arg(program, program->cmd[ip], arg, &ip);
         })
-// DEF_CMD(CALL, 16, 1, )
+DEF_CMD(CALL, 17, 1,
+        {
+        ip++;
+        int ind = program->cmd[ip];
+        ip++;
+        stack_push(&stk_ip, ip);
+        ip = ind - 1;  
+        })
+
+DEF_CMD(RET, 18, 0,
+        {
+        ip = stack_pop(&stk_ip) - 1;
+        })
 
 
 

@@ -5,10 +5,9 @@
 #define BIT_CONST   5
 #define BIT_REG     6
 #define BIT_RAM     7
-#define LEN_LABLE  15
+#define LEN_LABLE   15
 
 void get_args(prog *program, char *text_cmd, char *cmd, int *ip) {
-    // printf("%s\n", cmd);
     if (strcmp(cmd, "PUSH") == 0 || strcmp(cmd, "POP") == 0) {
         text_cmd += strlen(cmd) + 1;
         *ip -= 1;
@@ -22,6 +21,7 @@ void get_args(prog *program, char *text_cmd, char *cmd, int *ip) {
             text_cmd++;
             }
         }
+
         if (sscanf(text_cmd, "%s", arg_reg_ram) != 0) {
             if (strncmp(arg_reg_ram, "rax", 3) == 0) {
                 program->code[*ip] = program->code[*ip] | (1 << BIT_REG);
@@ -46,7 +46,7 @@ void get_args(prog *program, char *text_cmd, char *cmd, int *ip) {
         program->code[*ip] = arg;
         *ip += 1;
 
-    } else if (strncmp(cmd, "J", 1) == 0) {
+    } else if (strncmp(cmd, "J", 1) == 0 || strncmp(cmd, "CALL", 4) == 0) {
         text_cmd += strlen(cmd) + 1;
         int arg = 0;
         char *name_lable = (char *) calloc(LEN_LABLE, sizeof(char));
@@ -82,13 +82,11 @@ void my_strcpy_for_lable(char *text_for_cpy, char *text) {
 }
 
 
-
 #define DEF_CMD(cmd_name, number_cmd, args, ...)                        \
     if (strcmp(cmd, #cmd_name) == 0) {                                  \
         program->code[ip++] = number_cmd;                               \
         if (args) get_args(program, program->text[i], cmd, &ip);        \
     } else
-
 
 
 void compail(const char *file, prog *program) {
@@ -101,7 +99,6 @@ void compail(const char *file, prog *program) {
 
     assert(program->code != nullptr && "null pointer");
 
-    
     char cmd[10]; 
     int ip = 0;
     int ind_labl = 0;
@@ -109,7 +106,9 @@ void compail(const char *file, prog *program) {
     for (int i = 0; i < program->NUMBER; i++) {
         if (strchr(program->text[i], ':') != 0 ) {
             program->arr_text_lab[ind_labl].mame_label = (char *) calloc(strlen(program->text[i]), sizeof(char));
+            
             my_strcpy_for_lable(program->text[i], program->arr_text_lab[ind_labl].mame_label);
+            
             program->arr_text_lab[ind_labl].ip = ip;
             // printf(" in comp %d", program->arr_text_lab[ind_labl].ip);
             ind_labl++;
@@ -124,10 +123,10 @@ void compail(const char *file, prog *program) {
     for (int i = 0; i < ip; i++) {
         fprintf(fp, "%d ", program->code[i]);
     }
+    fprintf(fp, "\n");
 
     printf_listing(program, ip);
 
-    fprintf(fp, "\n");
     fclose(fp);
 }
 #undef DEF_CMD
@@ -143,8 +142,6 @@ void compail(const char *file, prog *program) {
             fprintf(fp, "%30s\n", #cmd_name); }                                         \
         break;                                                                          \
     
-
-
 void printf_listing(prog *text_program, int count_cmd) {
 
     const char *FILE_LISTING = "/mnt/c/Users/User/Desktop/programs/processor/res/listing.txt"; 
@@ -163,11 +160,8 @@ void printf_listing(prog *text_program, int count_cmd) {
             fprintf(fp, "didn't found comand\n");
             break;
         }
-
     }
-
     fclose(fp);
-
 }
 
 #undef DEF_CMD

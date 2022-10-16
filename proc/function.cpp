@@ -98,6 +98,7 @@ void create_cmd(prog *program) {
         ip++;
     }
 }
+
 int get_arg(prog *program, int cmd, int *ip) {
     assert(program != nullptr && "null pointer");
     int arg = 0;
@@ -141,10 +142,12 @@ void pop_arg (prog *program, int cmd, int arg, int *ip) {
         break;                                  \
     } 
 
-void run_program(prog *program, stack *stk) {
+int run_program(prog *program, stack *stk) {
     assert(program != nullptr && "null pointer");
 
     create_cmd(program);
+    stack stk_ip = {};
+    stack_ctor(stk_ip, 5);
 
     for (int ip = 0; ip < program->NUMBER_OF_ROW; ip++) {
         switch (program->cmd[ip] & MASK_CMD)
