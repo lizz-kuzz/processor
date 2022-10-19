@@ -1,0 +1,26 @@
+IN
+POP rbx
+PUSH 1
+POP rax
+
+fact:
+
+PUSH rbx
+PUSH rax
+MUL
+POP rax
+
+PUSH rbx
+PUSH -1
+ADD
+POP rbx
+
+
+PUSH rbx
+PUSH 0
+
+JNE fact
+
+PUSH rax
+OUT 
+HLT

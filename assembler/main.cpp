@@ -8,7 +8,10 @@
 int main() {
     prog program = {};
     program.lables[10] = {-1};
-    const char *FILE_PROG = "/mnt/c/Users/User/Desktop/programs/processor/res/ass_input.txt";
+    // const char *FILE_PROG = "/mnt/c/Users/User/Desktop/programs/processor/res/ass_input.txt";
+    // const char *FILE_PROG = "/mnt/c/Users/User/Desktop/programs/processor/res/square_equation.txt";
+    const char *FILE_PROG = "/mnt/c/Users/User/Desktop/programs/processor/res/factorial.txt";
+
     const char *FILE_ASS_OUTPUT = "/mnt/c/Users/User/Desktop/programs/processor/res/ass.output";
     // system("ls");
     // const char *FILE_PROG = "C://Users//User//Desktop//programs//processor//res//ass_input.txt";
@@ -17,7 +20,7 @@ int main() {
     read_file(FILE_PROG, &program);
     compail(FILE_ASS_OUTPUT, &program);
     compail(FILE_ASS_OUTPUT, &program);
-
+    
     free(program.code);
     free(program.text);
     free(program.text_buf);

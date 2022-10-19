@@ -13,7 +13,7 @@
 #define VERSION "3"
 
 #define SIZE_RAW 20
-#define SIZE_REG 4
+#define SIZE_REG 5
 
 typedef struct {
     char    *text_buf;

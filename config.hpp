@@ -7,12 +7,15 @@
         int ind = program->cmd[ip];    \
         ip = ind - 1;                  \
 
-#define JUMP_COND(sign)                \
-        int a = POP_;                  \
-        int b = POP_;                  \
-        if (b sign a)                  \
-            JUMP                            
-        
+        // printf("ffff\n");           
+
+
+#define JUMP_COND(sign)                 \
+        if (POP_ sign POP_) {           \
+            JUMP                        \
+        } else ip++; 
+        // int a = POP_;                  
+        // int b = POP_;                  
 
 #define OPERATION(sign)                \
         int a = POP_;                  \
@@ -20,10 +23,10 @@
         int c = b sign a;              \
         PUSH_(c);                
 
+        // printf("oper %s %d\n", #sign, c);    
 
 DEF_CMD(HLT, 0, 0,
         {
-        stack_dtor(stk);
         return 0;
         })
 
@@ -57,7 +60,7 @@ DEF_CMD(JMP, 8, 1, JUMP)
 
 DEF_CMD(DUP, 9, 0,             
         {
-        int a = POP;
+        int a = POP_;
         PUSH_(a);
         PUSH_(a);
         })

@@ -103,7 +103,6 @@ int get_arg(prog *program, int cmd, int *ip) {
     assert(program != nullptr && "null pointer");
     int arg = 0;
         *ip += 1;
-    
     if (cmd & MASK_ARG_IMMED) {
         arg += program->cmd[*ip];
     }
@@ -113,7 +112,6 @@ int get_arg(prog *program, int cmd, int *ip) {
     if (cmd & MASK_ARG_RAM) {
         arg = program->ram[arg];
     }
-    // printf("%d\n", arg);
     // *ip+= 1;
     return arg;
 
@@ -137,7 +135,8 @@ void pop_arg (prog *program, int cmd, int arg, int *ip) {
 
 
 #define DEF_CMD(cmd, number_cmd, arg, ...)      \
-    case cmd: {                                 \
+    case cmd:                                   \
+    {                                           \
         __VA_ARGS__                             \
         break;                                  \
     } 
@@ -147,17 +146,18 @@ int run_program(prog *program, stack *stk) {
 
     create_cmd(program);
     stack stk_ip = {};
-    stack_ctor(stk_ip, 5);
+    stack_ctor(stk_ip, 4);
 
     for (int ip = 0; ip < program->NUMBER_OF_ROW; ip++) {
         switch (program->cmd[ip] & MASK_CMD)
         {
             #include "/mnt/c/Users/User/Desktop/programs/processor/config.hpp"
         default:
-            printf("comand didn't found");
+            printf("comand didn't found %d cmd %d\n", ip, program->cmd[ip]);
             break;
         }
     }
+    stack_dtor(&stk_ip);
     return 0;
 }
 #undef DEF_CMD

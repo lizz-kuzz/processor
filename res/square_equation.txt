@@ -1,8 +1,112 @@
 IN    ;ввод a, b, c
+POP rax
 IN 
+POP rbx
 IN
-PUSH rcx
-PUSH rbx
+POP rcx
+
 PUSH rax
+OUT
+PUSH rax
+PUSH 0
+JE a_zero
+
+PUSH rbx
+DUP
+MUL
+PUSH -4
+PUSH rax
+PUSH rcx
+MUL
+MUL
+ADD
+DUP
+OUT
+POP rdx
+
+
+CALL two_roots
 
 HLT
+
+a_zero:
+PUSH rbx
+PUSH 0
+JE b_zero
+CALL one_root
+HLT
+
+b_zero:
+PUSH rcx
+PUSH 0
+JE c_zero
+PUSH -1
+OUT
+HLT
+
+c_zero:
+PUSH 12345
+OUT
+HLT
+
+one_root:
+PUSH rcx
+PUSH rbx
+PUSH -1
+MUL
+DIV 
+OUT
+RET
+
+two_roots:
+PUSH 0
+PUSH rdx
+JB d_nagative
+
+PUSH rdx
+PUSH 0
+JE d_zero
+
+PUSH rdx
+SQR
+POP rdx
+
+PUSH rax
+PUSH 2
+MUL
+POP rax
+
+PUSH rbx
+PUSH -1
+MUL 
+POP rbx
+
+PUSH rbx
+PUSH rdx
+ADD
+PUSH rax
+DIV
+OUT 
+
+
+PUSH rbx
+PUSH rdx
+SUB
+PUSH rax
+DIV
+OUT 
+
+HLT
+RET
+
+d_zero:
+CALL one_root
+HLT
+RET
+
+d_nagative:
+PUSH -1
+OUT 
+HLT
+RET
+

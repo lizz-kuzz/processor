@@ -62,6 +62,9 @@ void program_text_normalize(prog *text)  {
     for (int i = 1; (i <= text->NUMBER) && *(point) != '\0'; point++)  { 
         if (*point == '\n')  {
             *point = '\0';
+            // if (*(point + 1) == '\n') {
+            //     point += 2;
+            // }
             text->text[i] = point + 1;
             i++;
         } else if (*point == ';') {

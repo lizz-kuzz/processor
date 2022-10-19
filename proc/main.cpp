@@ -9,13 +9,13 @@ int main() {
     for (int i = 0; i < 20; i++) {
         program.ram[i] = i;
     }
-    program.reg[1] = 5;
-    program.reg[2] = 8;
-    program.reg[3] = 9;
-    program.reg[4] = 33;
+    program.reg[1] = 0;
+    program.reg[2] = 0;
+    program.reg[3] = 0;
+    program.reg[4] = 0;
     stack stk = {};
 
-    stack_ctor(stk, 5);
+    stack_ctor(stk, 1);
     
     read_file(FILE_ASS_OUTPUT, &program);
 
@@ -26,6 +26,10 @@ int main() {
     }
 
     run_program(&program, &stk);
+    for (int i = 0; i <= 4; i++) {
+        printf("coef %d\n", program.reg[i]);
+    }
+    stack_dtor(&stk);
     free_all(&program);
 
 
