@@ -26,9 +26,9 @@ int main() {
     }
 
     run_program(&program, &stk);
-    for (int i = 0; i <= 4; i++) {
-        printf("coef %d\n", program.reg[i]);
-    }
+    // for (int i = 0; i <= 4; i++) {
+    //     printf("coef %d\n", program.reg[i]);
+    // }
     stack_dtor(&stk);
     free_all(&program);
 

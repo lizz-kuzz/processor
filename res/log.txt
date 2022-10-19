@@ -1,18 +1,18 @@
 
 stack_ctor_() at proc/stack.cpp(97)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
+Stack[0x7ffddbb8c780] (ok) "stk" at main() at proc/main.cpp(18) 
   size = 0
   cappacity = 1
-  data [0x562ef76fc490]
+  data [0x555924975490]
   {
       *[0] = 0
   }
 
 stack_ctor_() at proc/stack.cpp(97)
-Stack[0x7fff2e5bb6a0] (ok) "stk_ip" at run_program() at proc/function.cpp(149) 
+Stack[0x7ffddbb8c6f0] (ok) "stk_ip" at run_program() at proc/function.cpp(149) 
   size = 0
   cappacity = 4
-  data [0x562ef76fd8c0]
+  data [0x555924976db0]
   {
       *[0] = 0
       *[1] = 0
@@ -21,866 +21,424 @@ Stack[0x7fff2e5bb6a0] (ok) "stk_ip" at run_program() at proc/function.cpp(149)
   }
 
 stack_push() at proc/stack.cpp(137)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
+Stack[0x7ffddbb8c780] (ok) "stk" at main() at proc/main.cpp(18) 
   size = 1
   cappacity = 1
-  data [0x562ef76fc490]
-  {
-      *[0] = 5
-  }
-
-stack_pop() at proc/stack.cpp(206)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 0
-  cappacity = 1
-  data [0x562ef76fc490]
-  {
-      *[0] = 0
-  }
-
-stack_push() at proc/stack.cpp(137)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 1
-  cappacity = 1
-  data [0x562ef76fc490]
+  data [0x555924975490]
   {
       *[0] = 1
   }
 
 stack_pop() at proc/stack.cpp(206)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
+Stack[0x7ffddbb8c780] (ok) "stk" at main() at proc/main.cpp(18) 
   size = 0
   cappacity = 1
-  data [0x562ef76fc490]
+  data [0x555924975490]
   {
       *[0] = 0
   }
 
 stack_push() at proc/stack.cpp(137)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
+Stack[0x7ffddbb8c780] (ok) "stk" at main() at proc/main.cpp(18) 
   size = 1
   cappacity = 1
-  data [0x562ef76fc490]
+  data [0x555924975490]
   {
-      *[0] = 5
+      *[0] = 6
+  }
+
+stack_pop() at proc/stack.cpp(206)
+Stack[0x7ffddbb8c780] (ok) "stk" at main() at proc/main.cpp(18) 
+  size = 0
+  cappacity = 1
+  data [0x555924975490]
+  {
+      *[0] = 0
+  }
+
+stack_push() at proc/stack.cpp(137)
+Stack[0x7ffddbb8c780] (ok) "stk" at main() at proc/main.cpp(18) 
+  size = 1
+  cappacity = 1
+  data [0x555924975490]
+  {
+      *[0] = 3456
+  }
+
+stack_pop() at proc/stack.cpp(206)
+Stack[0x7ffddbb8c780] (ok) "stk" at main() at proc/main.cpp(18) 
+  size = 0
+  cappacity = 1
+  data [0x555924975490]
+  {
+      *[0] = 0
+  }
+
+stack_push() at proc/stack.cpp(137)
+Stack[0x7ffddbb8c780] (ok) "stk" at main() at proc/main.cpp(18) 
+  size = 1
+  cappacity = 1
+  data [0x555924975490]
+  {
+      *[0] = 1
   }
 
 stack_resize() at proc/stack.cpp(187)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
+Stack[0x7ffddbb8c780] (ok) "stk" at main() at proc/main.cpp(18) 
   size = 1
   cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 5
-      *[1] = 0
-  }
-
-stack_push() at proc/stack.cpp(137)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 2
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 5
-      *[1] = 1
-  }
-
-stack_pop() at proc/stack.cpp(206)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 1
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 5
-      *[1] = 0
-  }
-
-stack_pop() at proc/stack.cpp(206)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 0
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 0
-      *[1] = 0
-  }
-
-stack_push() at proc/stack.cpp(137)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 1
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 5
-      *[1] = 0
-  }
-
-stack_pop() at proc/stack.cpp(206)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 0
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 0
-      *[1] = 0
-  }
-
-stack_push() at proc/stack.cpp(137)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 1
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 5
-      *[1] = 0
-  }
-
-stack_push() at proc/stack.cpp(137)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 2
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 5
-      *[1] = -1
-  }
-
-stack_pop() at proc/stack.cpp(206)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 1
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 5
-      *[1] = 0
-  }
-
-stack_pop() at proc/stack.cpp(206)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 0
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 0
-      *[1] = 0
-  }
-
-stack_push() at proc/stack.cpp(137)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 1
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 4
-      *[1] = 0
-  }
-
-stack_pop() at proc/stack.cpp(206)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 0
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 0
-      *[1] = 0
-  }
-
-stack_push() at proc/stack.cpp(137)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 1
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 4
-      *[1] = 0
-  }
-
-stack_push() at proc/stack.cpp(137)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 2
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 4
-      *[1] = 0
-  }
-
-stack_pop() at proc/stack.cpp(206)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 1
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 4
-      *[1] = 0
-  }
-
-stack_pop() at proc/stack.cpp(206)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 0
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 0
-      *[1] = 0
-  }
-
-stack_push() at proc/stack.cpp(137)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 1
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 4
-      *[1] = 0
-  }
-
-stack_push() at proc/stack.cpp(137)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 2
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 4
-      *[1] = 5
-  }
-
-stack_pop() at proc/stack.cpp(206)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 1
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 4
-      *[1] = 0
-  }
-
-stack_pop() at proc/stack.cpp(206)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 0
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 0
-      *[1] = 0
-  }
-
-stack_push() at proc/stack.cpp(137)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 1
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 20
-      *[1] = 0
-  }
-
-stack_pop() at proc/stack.cpp(206)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 0
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 0
-      *[1] = 0
-  }
-
-stack_push() at proc/stack.cpp(137)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 1
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 4
-      *[1] = 0
-  }
-
-stack_push() at proc/stack.cpp(137)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 2
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 4
-      *[1] = -1
-  }
-
-stack_pop() at proc/stack.cpp(206)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 1
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 4
-      *[1] = 0
-  }
-
-stack_pop() at proc/stack.cpp(206)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 0
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 0
-      *[1] = 0
-  }
-
-stack_push() at proc/stack.cpp(137)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 1
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 3
-      *[1] = 0
-  }
-
-stack_pop() at proc/stack.cpp(206)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 0
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 0
-      *[1] = 0
-  }
-
-stack_push() at proc/stack.cpp(137)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 1
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 3
-      *[1] = 0
-  }
-
-stack_push() at proc/stack.cpp(137)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 2
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 3
-      *[1] = 0
-  }
-
-stack_pop() at proc/stack.cpp(206)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 1
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 3
-      *[1] = 0
-  }
-
-stack_pop() at proc/stack.cpp(206)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 0
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 0
-      *[1] = 0
-  }
-
-stack_push() at proc/stack.cpp(137)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 1
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 3
-      *[1] = 0
-  }
-
-stack_push() at proc/stack.cpp(137)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 2
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 3
-      *[1] = 20
-  }
-
-stack_pop() at proc/stack.cpp(206)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 1
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 3
-      *[1] = 0
-  }
-
-stack_pop() at proc/stack.cpp(206)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 0
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 0
-      *[1] = 0
-  }
-
-stack_push() at proc/stack.cpp(137)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 1
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 60
-      *[1] = 0
-  }
-
-stack_pop() at proc/stack.cpp(206)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 0
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 0
-      *[1] = 0
-  }
-
-stack_push() at proc/stack.cpp(137)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 1
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 3
-      *[1] = 0
-  }
-
-stack_push() at proc/stack.cpp(137)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 2
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 3
-      *[1] = -1
-  }
-
-stack_pop() at proc/stack.cpp(206)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 1
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 3
-      *[1] = 0
-  }
-
-stack_pop() at proc/stack.cpp(206)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 0
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 0
-      *[1] = 0
-  }
-
-stack_push() at proc/stack.cpp(137)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 1
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 2
-      *[1] = 0
-  }
-
-stack_pop() at proc/stack.cpp(206)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 0
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 0
-      *[1] = 0
-  }
-
-stack_push() at proc/stack.cpp(137)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 1
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 2
-      *[1] = 0
-  }
-
-stack_push() at proc/stack.cpp(137)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 2
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 2
-      *[1] = 0
-  }
-
-stack_pop() at proc/stack.cpp(206)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 1
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 2
-      *[1] = 0
-  }
-
-stack_pop() at proc/stack.cpp(206)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 0
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 0
-      *[1] = 0
-  }
-
-stack_push() at proc/stack.cpp(137)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 1
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 2
-      *[1] = 0
-  }
-
-stack_push() at proc/stack.cpp(137)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 2
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 2
-      *[1] = 60
-  }
-
-stack_pop() at proc/stack.cpp(206)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 1
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 2
-      *[1] = 0
-  }
-
-stack_pop() at proc/stack.cpp(206)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 0
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 0
-      *[1] = 0
-  }
-
-stack_push() at proc/stack.cpp(137)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 1
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 120
-      *[1] = 0
-  }
-
-stack_pop() at proc/stack.cpp(206)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 0
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 0
-      *[1] = 0
-  }
-
-stack_push() at proc/stack.cpp(137)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 1
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 2
-      *[1] = 0
-  }
-
-stack_push() at proc/stack.cpp(137)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 2
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 2
-      *[1] = -1
-  }
-
-stack_pop() at proc/stack.cpp(206)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 1
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 2
-      *[1] = 0
-  }
-
-stack_pop() at proc/stack.cpp(206)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 0
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 0
-      *[1] = 0
-  }
-
-stack_push() at proc/stack.cpp(137)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 1
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 1
-      *[1] = 0
-  }
-
-stack_pop() at proc/stack.cpp(206)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 0
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 0
-      *[1] = 0
-  }
-
-stack_push() at proc/stack.cpp(137)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 1
-  cappacity = 2
-  data [0x562ef76fc490]
+  data [0x555924975490]
   {
       *[0] = 1
       *[1] = 0
   }
 
 stack_push() at proc/stack.cpp(137)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
+Stack[0x7ffddbb8c780] (ok) "stk" at main() at proc/main.cpp(18) 
   size = 2
   cappacity = 2
-  data [0x562ef76fc490]
+  data [0x555924975490]
   {
       *[0] = 1
       *[1] = 0
   }
 
 stack_pop() at proc/stack.cpp(206)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
+Stack[0x7ffddbb8c780] (ok) "stk" at main() at proc/main.cpp(18) 
   size = 1
   cappacity = 2
-  data [0x562ef76fc490]
+  data [0x555924975490]
   {
       *[0] = 1
       *[1] = 0
   }
 
 stack_pop() at proc/stack.cpp(206)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
+Stack[0x7ffddbb8c780] (ok) "stk" at main() at proc/main.cpp(18) 
   size = 0
   cappacity = 2
-  data [0x562ef76fc490]
+  data [0x555924975490]
   {
       *[0] = 0
       *[1] = 0
   }
 
 stack_push() at proc/stack.cpp(137)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
+Stack[0x7ffddbb8c780] (ok) "stk" at main() at proc/main.cpp(18) 
   size = 1
   cappacity = 2
-  data [0x562ef76fc490]
+  data [0x555924975490]
   {
-      *[0] = 1
+      *[0] = 6
+      *[1] = 0
+  }
+
+stack_pop() at proc/stack.cpp(206)
+Stack[0x7ffddbb8c780] (ok) "stk" at main() at proc/main.cpp(18) 
+  size = 0
+  cappacity = 2
+  data [0x555924975490]
+  {
+      *[0] = 0
       *[1] = 0
   }
 
 stack_push() at proc/stack.cpp(137)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
+Stack[0x7ffddbb8c780] (ok) "stk" at main() at proc/main.cpp(18) 
+  size = 1
+  cappacity = 2
+  data [0x555924975490]
+  {
+      *[0] = 6
+      *[1] = 0
+  }
+
+stack_push() at proc/stack.cpp(137)
+Stack[0x7ffddbb8c780] (ok) "stk" at main() at proc/main.cpp(18) 
   size = 2
   cappacity = 2
-  data [0x562ef76fc490]
+  data [0x555924975490]
   {
-      *[0] = 1
-      *[1] = 120
+      *[0] = 6
+      *[1] = 6
   }
 
 stack_pop() at proc/stack.cpp(206)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
+Stack[0x7ffddbb8c780] (ok) "stk" at main() at proc/main.cpp(18) 
   size = 1
   cappacity = 2
-  data [0x562ef76fc490]
+  data [0x555924975490]
   {
-      *[0] = 1
+      *[0] = 6
       *[1] = 0
   }
 
 stack_pop() at proc/stack.cpp(206)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
+Stack[0x7ffddbb8c780] (ok) "stk" at main() at proc/main.cpp(18) 
   size = 0
   cappacity = 2
-  data [0x562ef76fc490]
+  data [0x555924975490]
   {
       *[0] = 0
       *[1] = 0
   }
 
 stack_push() at proc/stack.cpp(137)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
+Stack[0x7ffddbb8c780] (ok) "stk" at main() at proc/main.cpp(18) 
   size = 1
   cappacity = 2
-  data [0x562ef76fc490]
+  data [0x555924975490]
   {
-      *[0] = 120
-      *[1] = 0
-  }
-
-stack_pop() at proc/stack.cpp(206)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 0
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 0
+      *[0] = 36
       *[1] = 0
   }
 
 stack_push() at proc/stack.cpp(137)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 1
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 1
-      *[1] = 0
-  }
-
-stack_push() at proc/stack.cpp(137)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
+Stack[0x7ffddbb8c780] (ok) "stk" at main() at proc/main.cpp(18) 
   size = 2
   cappacity = 2
-  data [0x562ef76fc490]
+  data [0x555924975490]
   {
-      *[0] = 1
-      *[1] = -1
+      *[0] = 36
+      *[1] = -4
   }
 
-stack_pop() at proc/stack.cpp(206)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 1
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 1
-      *[1] = 0
-  }
-
-stack_pop() at proc/stack.cpp(206)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 0
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 0
-      *[1] = 0
-  }
-
-stack_push() at proc/stack.cpp(137)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 1
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 0
-      *[1] = 0
-  }
-
-stack_pop() at proc/stack.cpp(206)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 0
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 0
-      *[1] = 0
-  }
-
-stack_push() at proc/stack.cpp(137)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 1
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 0
-      *[1] = 0
-  }
-
-stack_push() at proc/stack.cpp(137)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
+stack_resize() at proc/stack.cpp(187)
+Stack[0x7ffddbb8c780] (ok) "stk" at main() at proc/main.cpp(18) 
   size = 2
-  cappacity = 2
-  data [0x562ef76fc490]
+  cappacity = 4
+  data [0x555924975490]
   {
-      *[0] = 0
-      *[1] = 0
-  }
-
-stack_pop() at proc/stack.cpp(206)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 1
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 0
-      *[1] = 0
-  }
-
-stack_pop() at proc/stack.cpp(206)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 0
-  cappacity = 2
-  data [0x562ef76fc490]
-  {
-      *[0] = 0
-      *[1] = 0
+      *[0] = 36
+      *[1] = -4
+      *[2] = 0
+      *[3] = 0
   }
 
 stack_push() at proc/stack.cpp(137)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
-  size = 1
-  cappacity = 2
-  data [0x562ef76fc490]
+Stack[0x7ffddbb8c780] (ok) "stk" at main() at proc/main.cpp(18) 
+  size = 3
+  cappacity = 4
+  data [0x555924975490]
   {
-      *[0] = 120
-      *[1] = 0
+      *[0] = 36
+      *[1] = -4
+      *[2] = 1
+      *[3] = 0
+  }
+
+stack_push() at proc/stack.cpp(137)
+Stack[0x7ffddbb8c780] (ok) "stk" at main() at proc/main.cpp(18) 
+  size = 4
+  cappacity = 4
+  data [0x555924975490]
+  {
+      *[0] = 36
+      *[1] = -4
+      *[2] = 1
+      *[3] = 3456
   }
 
 stack_pop() at proc/stack.cpp(206)
-Stack[0x7fff2e5bb740] (ok) "stk" at main() at proc/main.cpp(18) 
+Stack[0x7ffddbb8c780] (ok) "stk" at main() at proc/main.cpp(18) 
+  size = 3
+  cappacity = 4
+  data [0x555924975490]
+  {
+      *[0] = 36
+      *[1] = -4
+      *[2] = 1
+      *[3] = 0
+  }
+
+stack_pop() at proc/stack.cpp(206)
+Stack[0x7ffddbb8c780] (ok) "stk" at main() at proc/main.cpp(18) 
+  size = 2
+  cappacity = 4
+  data [0x555924975490]
+  {
+      *[0] = 36
+      *[1] = -4
+      *[2] = 0
+      *[3] = 0
+  }
+
+stack_push() at proc/stack.cpp(137)
+Stack[0x7ffddbb8c780] (ok) "stk" at main() at proc/main.cpp(18) 
+  size = 3
+  cappacity = 4
+  data [0x555924975490]
+  {
+      *[0] = 36
+      *[1] = -4
+      *[2] = 3456
+      *[3] = 0
+  }
+
+stack_pop() at proc/stack.cpp(206)
+Stack[0x7ffddbb8c780] (ok) "stk" at main() at proc/main.cpp(18) 
+  size = 2
+  cappacity = 4
+  data [0x555924975490]
+  {
+      *[0] = 36
+      *[1] = -4
+      *[2] = 0
+      *[3] = 0
+  }
+
+stack_pop() at proc/stack.cpp(206)
+Stack[0x7ffddbb8c780] (ok) "stk" at main() at proc/main.cpp(18) 
+  size = 1
+  cappacity = 4
+  data [0x555924975490]
+  {
+      *[0] = 36
+      *[1] = 0
+      *[2] = 0
+      *[3] = 0
+  }
+
+stack_push() at proc/stack.cpp(137)
+Stack[0x7ffddbb8c780] (ok) "stk" at main() at proc/main.cpp(18) 
+  size = 2
+  cappacity = 4
+  data [0x555924975490]
+  {
+      *[0] = 36
+      *[1] = -13824
+      *[2] = 0
+      *[3] = 0
+  }
+
+stack_pop() at proc/stack.cpp(206)
+Stack[0x7ffddbb8c780] (ok) "stk" at main() at proc/main.cpp(18) 
+  size = 1
+  cappacity = 4
+  data [0x555924975490]
+  {
+      *[0] = 36
+      *[1] = 0
+      *[2] = 0
+      *[3] = 0
+  }
+
+stack_pop() at proc/stack.cpp(206)
+Stack[0x7ffddbb8c780] (ok) "stk" at main() at proc/main.cpp(18) 
   size = 0
-  cappacity = 2
-  data [0x562ef76fc490]
+  cappacity = 4
+  data [0x555924975490]
   {
       *[0] = 0
       *[1] = 0
+      *[2] = 0
+      *[3] = 0
+  }
+
+stack_push() at proc/stack.cpp(137)
+Stack[0x7ffddbb8c780] (ok) "stk" at main() at proc/main.cpp(18) 
+  size = 1
+  cappacity = 4
+  data [0x555924975490]
+  {
+      *[0] = -13788
+      *[1] = 0
+      *[2] = 0
+      *[3] = 0
+  }
+
+stack_pop() at proc/stack.cpp(206)
+Stack[0x7ffddbb8c780] (ok) "stk" at main() at proc/main.cpp(18) 
+  size = 0
+  cappacity = 4
+  data [0x555924975490]
+  {
+      *[0] = 0
+      *[1] = 0
+      *[2] = 0
+      *[3] = 0
+  }
+
+stack_push() at proc/stack.cpp(137)
+Stack[0x7ffddbb8c6f0] (ok) "stk_ip" at run_program() at proc/function.cpp(149) 
+  size = 1
+  cappacity = 4
+  data [0x555924976db0]
+  {
+      *[0] = 32
+      *[1] = 0
+      *[2] = 0
+      *[3] = 0
+  }
+
+stack_push() at proc/stack.cpp(137)
+Stack[0x7ffddbb8c780] (ok) "stk" at main() at proc/main.cpp(18) 
+  size = 1
+  cappacity = 4
+  data [0x555924975490]
+  {
+      *[0] = -13788
+      *[1] = 0
+      *[2] = 0
+      *[3] = 0
+  }
+
+stack_push() at proc/stack.cpp(137)
+Stack[0x7ffddbb8c780] (ok) "stk" at main() at proc/main.cpp(18) 
+  size = 2
+  cappacity = 4
+  data [0x555924975490]
+  {
+      *[0] = -13788
+      *[1] = 0
+      *[2] = 0
+      *[3] = 0
+  }
+
+stack_pop() at proc/stack.cpp(206)
+Stack[0x7ffddbb8c780] (ok) "stk" at main() at proc/main.cpp(18) 
+  size = 1
+  cappacity = 4
+  data [0x555924975490]
+  {
+      *[0] = -13788
+      *[1] = 0
+      *[2] = 0
+      *[3] = 0
+  }
+
+stack_pop() at proc/stack.cpp(206)
+Stack[0x7ffddbb8c780] (ok) "stk" at main() at proc/main.cpp(18) 
+  size = 0
+  cappacity = 4
+  data [0x555924975490]
+  {
+      *[0] = 0
+      *[1] = 0
+      *[2] = 0
+      *[3] = 0
+  }
+
+stack_push() at proc/stack.cpp(137)
+Stack[0x7ffddbb8c780] (ok) "stk" at main() at proc/main.cpp(18) 
+  size = 1
+  cappacity = 4
+  data [0x555924975490]
+  {
+      *[0] = -1
+      *[1] = 0
+      *[2] = 0
+      *[3] = 0
+  }
+
+stack_pop() at proc/stack.cpp(206)
+Stack[0x7ffddbb8c780] (ok) "stk" at main() at proc/main.cpp(18) 
+  size = 0
+  cappacity = 4
+  data [0x555924975490]
+  {
+      *[0] = 0
+      *[1] = 0
+      *[2] = 0
+      *[3] = 0
   }

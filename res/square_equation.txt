@@ -6,8 +6,6 @@ IN
 POP rcx
 
 PUSH rax
-OUT
-PUSH rax
 PUSH 0
 JE a_zero
 
@@ -20,10 +18,7 @@ PUSH rcx
 MUL
 MUL
 ADD
-DUP
-OUT
 POP rdx
-
 
 CALL two_roots
 
@@ -56,11 +51,13 @@ PUSH -1
 MUL
 DIV 
 OUT
+HLT
 RET
 
 two_roots:
-PUSH 0
+
 PUSH rdx
+PUSH 0
 JB d_nagative
 
 PUSH rdx
@@ -88,7 +85,6 @@ PUSH rax
 DIV
 OUT 
 
-
 PUSH rbx
 PUSH rdx
 SUB
@@ -100,7 +96,14 @@ HLT
 RET
 
 d_zero:
-CALL one_root
+PUSH rbx
+PUSH -1
+MUL
+PUSH 2
+PUSH rax
+MUL
+DIV
+OUT
 HLT
 RET
 

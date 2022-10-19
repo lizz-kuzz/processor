@@ -11,11 +11,11 @@
 
 
 #define JUMP_COND(sign)                 \
-        if (POP_ sign POP_) {           \
+        int a = POP_;                   \
+        int b = POP_;                   \
+        if (b sign a) {                 \
             JUMP                        \
         } else ip++; 
-        // int a = POP_;                  
-        // int b = POP_;                  
 
 #define OPERATION(sign)                \
         int a = POP_;                  \
