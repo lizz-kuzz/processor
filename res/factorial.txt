@@ -1,26 +1,26 @@
 IN
-POP rbx
+POP bx
 PUSH 1
-POP rax
+POP ax
 
 fact:
 
-PUSH rbx
-PUSH rax
+PUSH bx
+PUSH ax
 MUL
-POP rax
+POP ax
 
-PUSH rbx
+PUSH bx
 PUSH -1
 ADD
-POP rbx
+POP bx
 
 
-PUSH rbx
+PUSH bx
 PUSH 0
 
 JNE fact
 
-PUSH rax
+PUSH ax
 OUT 
 HLT

@@ -5,9 +5,7 @@
 #define JUMP                           \
         ip++;                          \
         int ind = program->cmd[ip];    \
-        ip = ind - 1;                  \
-
-        // printf("ffff\n");           
+        ip = ind - 1;                  
 
 
 #define JUMP_COND(sign)                 \
@@ -17,13 +15,13 @@
             JUMP                        \
         } else ip++; 
 
+
 #define OPERATION(sign)                \
         int a = POP_;                  \
         int b = POP_;                  \
         int c = b sign a;              \
         PUSH_(c);                
 
-        // printf("oper %s %d\n", #sign, c);    
 
 DEF_CMD(HLT, 0, 0,
         {

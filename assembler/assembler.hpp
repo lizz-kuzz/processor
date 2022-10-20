@@ -3,12 +3,16 @@
 
 #include "utils_ass.hpp"
 
-void compail(const char *file, prog *text_program);
+int compile(const char *file, prog *text_program);
 
 void printf_listing(prog *text_program, int count_cmd);
 
-void get_args(prog *program, char *text_cmd, char *cmd, int *ip);
+int get_args(prog *program, char *text_cmd, char *cmd, int *ip);
+
+int find_char(char * text, char symbol);
 
 void my_strcpy_for_lable(char *text_for_cpy, char *text);
+
+int processing_label(prog *program);
 
 #endif

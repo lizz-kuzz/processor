@@ -1,4 +1,4 @@
-#include "function.hpp"
+#include "processor.hpp"
 
 #define HEADER_SIZE 2
 
@@ -91,8 +91,10 @@ int check_version(prog *program) {
 
 void create_cmd(prog *program) {
     assert(program != nullptr && "null pointer");
+
     int ip = 0;
     program->cmd = (int *) calloc(program->NUMBER_OF_ROW, sizeof(int));
+
     for (int i = HEADER_SIZE + 1; i < program->NUMBER_OF_ROW - 1; i++) {
         sscanf(program->arr_comand[i], "%d", &program->cmd[ip]);
         ip++;
@@ -101,6 +103,7 @@ void create_cmd(prog *program) {
 
 int get_arg(prog *program, int cmd, int *ip) {
     assert(program != nullptr && "null pointer");
+
     int arg = 0;
         *ip += 1;
     if (cmd & MASK_ARG_IMMED) {
@@ -112,15 +115,16 @@ int get_arg(prog *program, int cmd, int *ip) {
     if (cmd & MASK_ARG_RAM) {
         arg = program->ram[arg];
     }
-    // *ip+= 1;
-    return arg;
 
+    return arg;
 }
 
 
 void pop_arg (prog *program, int cmd, int arg, int *ip) {
     assert(program != nullptr && "null pointer");
-        *ip += 1;
+
+    *ip += 1;
+
     if (cmd & MASK_ARG_IMMED) {
         ;
     }
@@ -142,8 +146,9 @@ void pop_arg (prog *program, int cmd, int arg, int *ip) {
     } 
 
 int run_program(prog *program, stack *stk) {
-    assert(program != nullptr && "null pointer");
 
+    assert(program != nullptr && "null pointer");
+// переименовать
     create_cmd(program);
     stack stk_ip = {};
     stack_ctor(stk_ip, 4);
@@ -157,11 +162,12 @@ int run_program(prog *program, stack *stk) {
             break;
         }
     }
+
     stack_dtor(&stk_ip);
     return 0;
 }
 #undef DEF_CMD
-
+// переименовать
 void free_all(prog *program) {
     assert(program != nullptr && "null pointer"); 
     free(program->arr_comand);

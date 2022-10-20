@@ -1,5 +1,11 @@
 PUSH 4
-POP rax
+mef:
 PUSH 5
+CALL mef
+meme:
+CALL meme
+PUSH [ax]
+meme:
 POP rbx
 HLT
+

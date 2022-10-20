@@ -8,6 +8,6 @@ FLAGS = -g -Wshadow -Winit-self -Wredundant-decls -Wcast-align -Wundef -Wfloat-e
 ass:
 	@$(СС) $(FLAGS) assembler/main.cpp assembler/file.cpp assembler/assembler.cpp -o ass.exe 
 cpu:
-	@$(СС) $(FLAGS) proc/main.cpp proc/function.cpp proc/stack.cpp proc/debug.cpp  -o cpu.exe 
+	@$(СС) $(FLAGS) proc/main.cpp proc/processor.cpp proc/stack.cpp proc/debug.cpp  -o cpu.exe 
 disass:
 	@$(СС) $(FLAGS) disassembler/main.cpp assembler/file.cpp disassembler/disassembler.cpp -o disass.exe

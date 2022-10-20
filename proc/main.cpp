@@ -1,4 +1,4 @@
-#include "function.hpp"
+#include "processor.hpp"
 
 int main() {
     const char *FILE_ASS_OUTPUT = "/mnt/c/Users/User/Desktop/programs/processor/res/ass.output";

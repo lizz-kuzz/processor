@@ -1,38 +1,38 @@
 IN    ;ввод a, b, c
-POP rax
+POP ax
 IN 
-POP rbx
+POP bx
 IN
-POP rcx
+POP cx
 
-PUSH rax
+PUSH ax
 PUSH 0
 JE a_zero
 
-PUSH rbx
+PUSH bx
 DUP
 MUL
 PUSH -4
-PUSH rax
-PUSH rcx
+PUSH ax
+PUSH cx
 MUL
 MUL
 ADD
-POP rdx
+POP dx
 
 CALL two_roots
 
 HLT
 
 a_zero:
-PUSH rbx
+PUSH bx
 PUSH 0
 JE b_zero
 CALL one_root
 HLT
 
 b_zero:
-PUSH rcx
+PUSH cx
 PUSH 0
 JE c_zero
 PUSH -1
@@ -45,8 +45,8 @@ OUT
 HLT
 
 one_root:
-PUSH rcx
-PUSH rbx
+PUSH cx
+PUSH bx
 PUSH -1
 MUL
 DIV 
@@ -56,39 +56,39 @@ RET
 
 two_roots:
 
-PUSH rdx
+PUSH dx
 PUSH 0
 JB d_nagative
 
-PUSH rdx
+PUSH dx
 PUSH 0
 JE d_zero
 
-PUSH rdx
+PUSH dx
 SQR
-POP rdx
+POP dx
 
-PUSH rax
+PUSH ax
 PUSH 2
 MUL
-POP rax
+POP ax
 
-PUSH rbx
+PUSH bx
 PUSH -1
 MUL 
-POP rbx
+POP bx
 
-PUSH rbx
-PUSH rdx
+PUSH bx
+PUSH dx
 ADD
-PUSH rax
+PUSH ax
 DIV
 OUT 
 
-PUSH rbx
-PUSH rdx
+PUSH bx
+PUSH dx
 SUB
-PUSH rax
+PUSH ax
 DIV
 OUT 
 
@@ -96,11 +96,11 @@ HLT
 RET
 
 d_zero:
-PUSH rbx
+PUSH bx
 PUSH -1
 MUL
 PUSH 2
-PUSH rax
+PUSH ax
 MUL
 DIV
 OUT
