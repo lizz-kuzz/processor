@@ -8,98 +8,63 @@
 #define MASK_ARG_IMMED 0x20
 
 
-void read_file(const char *TEXT, prog *text) {
-    FILE *file = fopen(TEXT, "r");
+int read_arr_cmd(const char *FILE_BIN, prog *program, stack *stk) {
 
-    assert(file != nullptr && "coudn't open file");
-
-    if (file == NULL)
-        printf("Could not open file.\n");
+    FILE *file = fopen(FILE_BIN, "r+b");
     
-    text->SYMBOLS = count_symbols(file);
-
-    text->text_buf = (char *) calloc(text->SYMBOLS + 1, sizeof(char)); 
-
-    assert(text->text_buf != nullptr && "null pointer");
-
-    fread(text->text_buf, sizeof(char), text->SYMBOLS, file);
-
-    fclose(file);
-
-    program_text_normalize(text);
-}
-
-int num_of_rows(char *text)  {
-    int count = 0;
-    char *point = text;
-
-    while (*point != '\0')  {
-        if (*point == '\n' || *point == ' ')
-            count++;
-        point++;
-    }
-    return count;
-}
-
-long int count_symbols(FILE *file)  {
-    fseek(file, 0, SEEK_END);
-    
-    long int number = ftell(file);
-
-    fseek(file, 0, SEEK_SET);
-
-    return number;
-}
-
-void program_text_normalize(prog *text)  {
-    assert(text != nullptr && "null pointer");
-
-    text->NUMBER_OF_ROW = num_of_rows(text->text_buf);
-   
-    char *point = text->text_buf;
-    text->arr_comand = (char **) calloc(text->NUMBER_OF_ROW + 1, sizeof(char *));
-
-    assert(text->arr_comand != nullptr && "null pointer");
-
-    text->arr_comand[0] = point;
-
-    for (int i = 1; (i <= text->NUMBER_OF_ROW) && *(point) != '\0'; point++)  { 
-        if (*point == '\n' || *point == ' ')  {
-            *point = '\0';
-            text->arr_comand[i] = point + 1;
-            i++;
-        }
-    }
-}
-
-
-int check_version(prog *program) {
-    assert(program != nullptr && "null pointer");
-    
-    if (strcmp(program->arr_comand[0], SIGNATURE) != 0) {
-        printf("the signature does not match, it is impossible to execute the program\n");
+    fread(program->arr_sign, sizeof(int), SIZE_ARR_SIGN, file);
+    if (check_version(program) != 0) {
+        dtor(program, stk);
         return 1;
     }
-    if (strcmp(program->arr_comand[1], VERSION) != 0) {
-        printf("the processor does not support this version of the program, buy coffee to the developer or a new processor\n");
-        return 1;
-    }
-    program->NUMBER_OF_CMD = atoi(program->arr_comand[2]);
+
+    program->cmd = (int *) calloc(program->NUMBER_OF_CMD + 1, sizeof(int));
+    fread(program->cmd, sizeof(int), program->NUMBER_OF_CMD, file);
+
+    fclose(file);  
 
     return 0;
 }
 
-void create_cmd(prog *program) {
+void ctor(prog *program, stack *stk) {
     assert(program != nullptr && "null pointer");
+    assert(stk     != nullptr && "null pointer");
 
-    int ip = 0;
-    program->cmd = (int *) calloc(program->NUMBER_OF_ROW, sizeof(int));
-
-    for (int i = HEADER_SIZE + 1; i < program->NUMBER_OF_ROW - 1; i++) {
-        sscanf(program->arr_comand[i], "%d", &program->cmd[ip]);
-        ip++;
+    for (int i = 0; i < 20; i++) {
+        program->ram[i] = i;
     }
+    program->reg[1] = 0;
+    program->reg[2] = 0;
+    program->reg[3] = 0;
+    program->reg[4] = 0;
 }
+
+void dtor (prog *program, stack *stk) {    
+    assert(program != nullptr && "null pointer");
+    assert(stk     != nullptr && "null pointer");
+
+    stack_dtor(stk);
+
+    free(program->cmd);
+
+}
+
+int check_version(prog *program) {
+    assert(program != nullptr && "null pointer");
+    
+    if (program->arr_sign[0] != SIGNATURE) {
+        printf("the signature does not match, it is impossible to execute the program\n");
+        return 1;
+    }
+    if (program->arr_sign[1] != VERSION) {
+        printf("the processor does not support this version of the program, buy coffee to the developer or a new processor\n");
+        return 1;
+    }
+    program->NUMBER_OF_CMD = program->arr_sign[2];
+
+    return 0;
+}
+
 
 int get_arg(prog *program, int cmd, int *ip) {
     assert(program != nullptr && "null pointer");
@@ -125,13 +90,11 @@ void pop_arg (prog *program, int cmd, int arg, int *ip) {
 
     *ip += 1;
 
-    if (cmd & MASK_ARG_IMMED) {
-        ;
-    }
-    if (cmd & MASK_ARG_REG) {
+    if (cmd & MASK_ARG_RAM && cmd & MASK_ARG_REG) {
+        program->ram[program->reg[program->cmd[*ip]]] = arg;
+    } else if (cmd & MASK_ARG_REG) {
         program->reg[program->cmd[*ip]] = arg;
-    } 
-    if (cmd & MASK_ARG_RAM) {
+    } else if (cmd & MASK_ARG_RAM) {
         program->ram[program->cmd[*ip]] = arg;
     }
 }
@@ -148,12 +111,10 @@ void pop_arg (prog *program, int cmd, int arg, int *ip) {
 int run_program(prog *program, stack *stk) {
 
     assert(program != nullptr && "null pointer");
-// переименовать
-    create_cmd(program);
     stack stk_ip = {};
     stack_ctor(stk_ip, 4);
 
-    for (int ip = 0; ip < program->NUMBER_OF_ROW; ip++) {
+    for (int ip = 0; ip < program->NUMBER_OF_CMD; ip++) {
         switch (program->cmd[ip] & MASK_CMD)
         {
             #include "/mnt/c/Users/User/Desktop/programs/processor/config.hpp"
@@ -167,10 +128,3 @@ int run_program(prog *program, stack *stk) {
     return 0;
 }
 #undef DEF_CMD
-// переименовать
-void free_all(prog *program) {
-    assert(program != nullptr && "null pointer"); 
-    free(program->arr_comand);
-    free(program->cmd);
-    free(program->text_buf);
-}

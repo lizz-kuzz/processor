@@ -1,8 +1,14 @@
 #ifndef FUNCTION_HPP_INCLUDED
 #define FUNCTION_HPP_INCLUDED
 #include "utils_proc.hpp"
-#include "stack.hpp"
-#include "debug.hpp"
+#include "../stack/stack.hpp"
+#include "../stack/debug.hpp"
+
+int      read_arr_cmd             (const char *FILE, prog *program, stack *stk);
+
+void     dtor                    (prog *program, stack *stk);
+
+void     ctor                    (prog *program, stack *stk);
 
 int      check_version           (prog *program);
 
@@ -19,8 +25,6 @@ void     read_file               (const char *TEXT, prog *text);
 void     program_text_normalize  (prog *text);
 
 int      get_arg                 (prog *program, int cmd, int *ip);
-
-void     free_all                (prog *program);
 
 void     create_cmd              (prog *program);
 

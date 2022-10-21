@@ -101,4 +101,14 @@ DEF_CMD(SQR, 19, 0,
         PUSH_(num);
         })
 
+DEF_CMD(OUTPUT, 20, 0,
+        {
+        int sqr_size_ram = sqrt(SIZE_RAM);
+        for (int i = 0; i < SIZE_RAM; i++) {
+                printf("%c", program->ram[i]);
+                if ((i+1) % sqr_size_ram == 0)     
+                        printf("\n", program->ram[i]);
+        }
+        })
+
 

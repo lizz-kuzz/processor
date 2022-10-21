@@ -9,10 +9,15 @@
 
 #include "../utils.hpp"
 
-#define SIGNATURE "CP"
+#define SIGNATURE 'CP'
 #define VERSION 3
 #define LEN_ARR_LABLES 10
-
+#define MASK_CMD    0x1f
+#define BIT_CONST   5
+#define BIT_REG     6
+#define BIT_RAM     7
+#define LEN_LABLE   30
+#define LEN_CMD     30
 
 typedef struct {
     char *mame_label;

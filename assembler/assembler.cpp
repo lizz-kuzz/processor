@@ -1,12 +1,6 @@
 #include "assembler.hpp"
 #include "file.hpp"
 
-#define MASK_CMD    0x1f
-#define BIT_CONST   5
-#define BIT_REG     6
-#define BIT_RAM     7
-#define LEN_LABLE   30
-#define LEN_CMD     30
 
 int find_char(char * text, char symbol) {
     char *point = text;
@@ -31,7 +25,7 @@ int get_args(prog *program, char *text_cmd, char *cmd, int *ip) {
             text_cmd++;
             }
         }
-
+        
         if (sscanf(text_cmd, "%s", arg_reg_ram) != 0) {
             if (strncmp(arg_reg_ram, "ax", 2) == 0) {
                 program->code[*ip] = program->code[*ip] | (1 << BIT_REG);
@@ -109,8 +103,6 @@ void my_strcpy_for_lable(char *text_for_cpy, char *text) {
     } else 
 
 
-
-
 int processing_label(prog *program) {
     int ip = 0; 
     int ind_labl = 0;
@@ -150,59 +142,51 @@ int processing_label(prog *program) {
         } else
 
 int compile(const char *file, prog *program) {
-    FILE *fp = fopen(file, "w+b");
-    assert(fp != nullptr && "coudn't open file");
-
-    fprintf(fp, "%s %d %d\n", SIGNATURE, VERSION, program->NUMBER);
 
     program->code = (int *) calloc(program->NUMBER * 2, sizeof(int));
 
     assert(program->code != nullptr && "null pointer");
 
-    char cmd[LEN_CMD]; 
-    int ip = 0;
-
     int error_lable = 0;
     error_lable = processing_label(program);
     if (error_lable == 1) return 0;
-    for (int i = 0; i < LEN_ARR_LABLES && program->arr_text_lab[i].mame_label != NULL ; i++) {
-        printf("%s\n", program->arr_text_lab[i].mame_label);
-    }
+    
+    char cmd[LEN_CMD]; 
+    int ip = 0;
 
     for (int i = 0; i < program->NUMBER; i++) {
         if (strlen(program->text[i]) >= LEN_CMD) {
             printf("compilation error: the length of the command \"%s\" exceeded the allowed length\n", program->text[i]);
             return 0;
         }
-        if (strchr(program->text[i], ':') != 0 && *program->text[i] != '\0') {
-            // program->arr_text_lab[ind_labl].mame_label = (char *) calloc(strlen(program->text[i]), sizeof(char));
 
-            // my_strcpy_for_lable(program->text[i], program->arr_text_lab[ind_labl].mame_label);
-            
-            // program->arr_text_lab[ind_labl].ip = ip;
-            // for (i = 0; i < LEN_ARR_LABLES && program->arr_text_lab[i].mame_label != NULL ; i++) {
-            //     if (strcmp(program->arr_text_lab[ind_labl].mame_label, program->arr_text_lab[i].mame_label) == 0) {
-            //         printf("compilation error: the function \"%s\" has already been used\n", program->arr_text_lab[ind_labl].mame_label);
-            //         // return 0;
-            //     }
-            // }
-            // printf(" in comp %d", program->arr_text_lab[ind_labl].ip);
-            // for (i = 0; i < LEN_ARR_LABLES && program->arr_text_lab[i].mame_label != NULL ; i++) {
-            //     printf("%s\n", program->arr_text_lab[i].mame_label);    
-            // }
-            // ind_labl++;
+        if (strchr(program->text[i], ':') != 0 && *program->text[i] != '\0') {
+            ;
         } else if (sscanf(program->text[i], "%s", cmd) != 0 && *program->text[i] != '\0') {
 
             #include "/mnt/c/Users/User/Desktop/programs/processor/config.hpp"
             /*else*/ printf("comand didn't found\n");
-        
         }
     }
+    FILE *fp = fopen(file, "w+b");
+    assert(fp != nullptr && "coudn't open file");
 
-    for (int i = 0; i < ip; i++) {
-        fprintf(fp, "%d ", program->code[i]);
-    }
-    fprintf(fp, "\n");
+    int version = VERSION;
+    int signature = SIGNATURE;
+
+    const int *psign = &signature;
+    const int *pversion = &version;
+    const int *pnum = &ip; 
+
+    fwrite(psign, sizeof(int), 1, fp);
+    fwrite(pversion, sizeof(int), 1, fp);
+    fwrite(pnum, sizeof(int), 1, fp);
+
+    fwrite(program->code, sizeof(int), ip, fp);
+    // for (int i = 0; i < ip; i++) {
+    //     fprintf(fp, "%d ", program->code[i]);
+    // }
+    // fprintf(fp, "\n");
     
     printf_listing(program, ip);
 
@@ -223,6 +207,7 @@ int compile(const char *file, prog *program) {
         break;                                                                          \
     
 void printf_listing(prog *text_program, int count_cmd) {
+    assert(text_program != nullptr && "null pointer");
 
     const char *FILE_LISTING = "/mnt/c/Users/User/Desktop/programs/processor/res/listing.txt"; 
     // const char *FILE_LISTING = "C://Users//User//Desktop//programs//processor//res//listing.txt"; 
@@ -245,3 +230,11 @@ void printf_listing(prog *text_program, int count_cmd) {
 }
 
 #undef DEF_CMD
+
+void dtor(prog *program) {
+    assert(program != nullptr && "null pointer");
+
+    free(program->code);
+    free(program->text);
+    free(program->text_buf);
+}

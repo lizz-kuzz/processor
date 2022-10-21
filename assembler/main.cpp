@@ -8,9 +8,10 @@
 int main() {
     prog program = {};
 
-    const char *FILE_PROG = "/mnt/c/Users/User/Desktop/programs/processor/res/ass_input.txt";
+    // const char *FILE_PROG = "/mnt/c/Users/User/Desktop/programs/processor/res/ass_input.txt";
     // const char *FILE_PROG = "/mnt/c/Users/User/Desktop/programs/processor/res/square_equation.txt";
     // const char *FILE_PROG = "/mnt/c/Users/User/Desktop/programs/processor/res/factorial.txt";
+    const char *FILE_PROG = "/mnt/c/Users/User/Desktop/programs/processor/res/aaa.txt";
 
     const char *FILE_ASS_OUTPUT = "/mnt/c/Users/User/Desktop/programs/processor/res/ass.output";
     // system("ls");
@@ -21,8 +22,7 @@ int main() {
 
     compile(FILE_ASS_OUTPUT, &program);
     
-    free(program.code);
-    free(program.text);
-    free(program.text_buf);
+    dtor(&program);
+  
     return 0;
 }

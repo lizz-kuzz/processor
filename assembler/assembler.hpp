@@ -15,4 +15,6 @@ void my_strcpy_for_lable(char *text_for_cpy, char *text);
 
 int processing_label(prog *program);
 
+void dtor(prog *program);
+
 #endif
