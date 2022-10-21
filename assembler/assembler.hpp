@@ -17,4 +17,6 @@ int processing_label(prog *program);
 
 void dtor(prog *program);
 
+void create_file_path(char *FILE_PROG, char *path, char *name_file);
+
 #endif

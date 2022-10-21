@@ -1,6 +1,22 @@
 #include "assembler.hpp"
 #include "file.hpp"
 
+void create_file_path(char *FILE_PROG, char *path, char *name_file) {
+    assert(path      != nullptr && "null pointer");
+    assert(name_file != nullptr && "null pointer");
+    assert(FILE_PROG != nullptr && "null pointer");
+
+    char *save_point = FILE_PROG;
+
+    for (; *path != '\0'; path++, save_point++) {
+        *save_point = *path;
+    }
+    for (; *name_file != '\0'; name_file++, save_point++) {
+        *save_point = *name_file;
+    }
+    *save_point = '\0';
+
+}
 
 int find_char(char * text, char symbol) {
     char *point = text;
