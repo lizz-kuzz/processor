@@ -28,6 +28,8 @@ int find_char(char * text, char symbol) {
 }
 
 int get_args(prog *program, char *text_cmd, char *cmd, int *ip) {
+    assert(program != nullptr && "null pointer");
+
     if (strcmp(cmd, "PUSH") == 0 || strcmp(cmd, "POP") == 0) {
         text_cmd += strlen(cmd) + 1;
         *ip -= 1;
@@ -75,17 +77,7 @@ int get_args(prog *program, char *text_cmd, char *cmd, int *ip) {
         text_cmd += strlen(cmd) + 1;
         int arg = -1;
         char name_lable[LEN_LABLE];
-        // if (sscanf(text_cmd, "%d", &arg) != 0) {
-        //     printf("fff\n");
-        //     ;
-        // // } else if (*text_cmd == ':') {
-            // char *name_lable;
 
-            // text_cmd++;
-            // int labl = 0;
-            // text_cmd++;
-            // sscanf(text_cmd, "%d", &labl);
-            // arg = program->lables[labl];
         if (sscanf(text_cmd, "%s", name_lable) != 0) {
             for (int i = 0; i < LEN_ARR_LABLES && program->arr_text_lab[i].mame_label != NULL ; i++) {
                 if (strcmp(name_lable, program->arr_text_lab[i].mame_label) == 0) {
@@ -120,8 +112,11 @@ void my_strcpy_for_lable(char *text_for_cpy, char *text) {
 
 
 int processing_label(prog *program) {
+    assert(program != nullptr && "null pointer");
+
     int ip = 0; 
     int ind_labl = 0;
+
     for (int i = 0; i < program->NUMBER; i++) {
         if (*program->text[i] == '\0') i++;
 
@@ -159,6 +154,8 @@ int processing_label(prog *program) {
 
 int compile(const char *file, prog *program) {
 
+    assert(program != nullptr && "null pointer");
+
     program->code = (int *) calloc(program->NUMBER * 2, sizeof(int));
 
     assert(program->code != nullptr && "null pointer");
@@ -187,22 +184,18 @@ int compile(const char *file, prog *program) {
     FILE *fp = fopen(file, "w+b");
     assert(fp != nullptr && "coudn't open file");
 
-    int version = VERSION;
+    int version   = VERSION;
     int signature = SIGNATURE;
 
-    const int *psign = &signature;
+    const int *psign    = &signature;
     const int *pversion = &version;
-    const int *pnum = &ip; 
+    const int *pnum     = &ip; 
 
-    fwrite(psign, sizeof(int), 1, fp);
+    fwrite(psign,    sizeof(int), 1, fp);
     fwrite(pversion, sizeof(int), 1, fp);
-    fwrite(pnum, sizeof(int), 1, fp);
+    fwrite(pnum,     sizeof(int), 1, fp);
 
     fwrite(program->code, sizeof(int), ip, fp);
-    // for (int i = 0; i < ip; i++) {
-    //     fprintf(fp, "%d ", program->code[i]);
-    // }
-    // fprintf(fp, "\n");
     
     printf_listing(program, ip);
 
@@ -226,8 +219,6 @@ void printf_listing(prog *text_program, int count_cmd) {
     assert(text_program != nullptr && "null pointer");
 
     const char *FILE_LISTING = "/mnt/c/Users/User/Desktop/programs/processor/res/listing.txt"; 
-    // const char *FILE_LISTING = "C://Users//User//Desktop//programs//processor//res//listing.txt"; 
-
 
     FILE *fp = fopen(FILE_LISTING, "w");
     assert(fp != nullptr && "coudn't open file");
