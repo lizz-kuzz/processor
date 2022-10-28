@@ -118,6 +118,10 @@ int processing_label(prog *program) {
     int ind_labl = 0;
 
     for (int i = 0; i < program->NUMBER; i++) {
+        if (strlen(program->text[i]) >= LEN_LABLE) {
+            printf("compilation error: the length of the lable \"%s\" exceeded the allowed length\n", program->text[i]);
+            return 1;
+        }
         if (*program->text[i] == '\0') i++;
 
         #include "/mnt/c/Users/User/Desktop/programs/processor/config.hpp"
@@ -149,7 +153,7 @@ int processing_label(prog *program) {
         if (args) {                                                     \
             error = get_args(program, program->text[i], cmd, &ip);      \
         }                                                               \
-        if (error == 1) return 0;                                       \
+        if (error == 1) return 1;                                       \
         } else
 
 int compile(const char *file, prog *program) {
@@ -162,7 +166,8 @@ int compile(const char *file, prog *program) {
 
     int error_lable = 0;
     error_lable = processing_label(program);
-    if (error_lable == 1) return 0;
+
+    if (error_lable == 1) return 1;
     
     char cmd[LEN_CMD]; 
     int ip = 0;
@@ -170,17 +175,18 @@ int compile(const char *file, prog *program) {
     for (int i = 0; i < program->NUMBER; i++) {
         if (strlen(program->text[i]) >= LEN_CMD) {
             printf("compilation error: the length of the command \"%s\" exceeded the allowed length\n", program->text[i]);
-            return 0;
+            return 1;
         }
 
         if (strchr(program->text[i], ':') != 0 && *program->text[i] != '\0') {
-            ;
+            continue;
         } else if (sscanf(program->text[i], "%s", cmd) != 0 && *program->text[i] != '\0') {
 
             #include "/mnt/c/Users/User/Desktop/programs/processor/config.hpp"
             /*else*/ printf("comand didn't found\n");
         }
     }
+    
     FILE *fp = fopen(file, "w+b");
     assert(fp != nullptr && "coudn't open file");
 

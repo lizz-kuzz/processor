@@ -19,9 +19,10 @@ int main(int argc, char *argv[]) {
 
     read_file(FILE_PROG, &program);
 
-    compile(FILE_ASS_OUTPUT, &program);
+    if (compile(FILE_ASS_OUTPUT, &program) == 1) return 1;
     
     dtor(&program);
+    system("./cpu.exe");
   
     return 0;
 }

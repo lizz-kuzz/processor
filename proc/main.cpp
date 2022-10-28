@@ -15,7 +15,9 @@ int main() {
     run_program(&program, &stk);
 
     
-    dtor(&program, &stk);
+    dtor_program(&program);
+
+    stack_dtor(&stk);
 
 
     return 0;

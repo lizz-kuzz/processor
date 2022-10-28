@@ -14,7 +14,8 @@ int read_arr_cmd(const char *FILE_BIN, prog *program, stack *stk) {
     
     fread(program->arr_sign, sizeof(int), SIZE_ARR_SIGN, file);
     if (check_version(program) != 0) {
-        dtor(program, stk);
+        dtor_program(program);
+        stack_dtor(stk);
         return 1;
     }
 
@@ -26,12 +27,12 @@ int read_arr_cmd(const char *FILE_BIN, prog *program, stack *stk) {
     return 0;
 }
 
-void ctor(prog *program, stack *stk) {
+void ctor_program(prog *program, stack *stk) {
     assert(program != nullptr && "null pointer");
     assert(stk     != nullptr && "null pointer");
 
     for (int i = 0; i < 20; i++) {
-        program->ram[i] = i;
+        program->ram[i] = 0;
     }
     program->reg[1] = 0;
     program->reg[2] = 0;
@@ -39,14 +40,10 @@ void ctor(prog *program, stack *stk) {
     program->reg[4] = 0;
 }
 
-void dtor (prog *program, stack *stk) {    
+void dtor_program (prog *program) {    
     assert(program != nullptr && "null pointer");
-    assert(stk     != nullptr && "null pointer");
-
-    stack_dtor(stk);
 
     free(program->cmd);
-
 }
 
 int check_version(prog *program) {

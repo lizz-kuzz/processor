@@ -6,9 +6,9 @@
 
 int      read_arr_cmd             (const char *FILE, prog *program, stack *stk);
 
-void     dtor                    (prog *program, stack *stk);
+void     dtor_program            (prog *program);
 
-void     ctor                    (prog *program, stack *stk);
+void     ctor_program            (prog *program, stack *stk);
 
 int      check_version           (prog *program);
 
